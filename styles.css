@@ -5,7 +5,7 @@ html, body {
     display: flex;
     flex-direction: column;
     font-family: Arial, sans-serif;
-    background-size: cover;
+    background-size: 100% 100vh; /* Ensure full viewport height coverage */
     background-repeat: no-repeat;
     background-position: center;
     color: white;
@@ -15,7 +15,11 @@ body {
     text-align: center;
     margin: 0; /* Reset default body margin */
 }
-
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure container fills the viewport height */
+}
 nav {
     position: fixed;
     top: 0;

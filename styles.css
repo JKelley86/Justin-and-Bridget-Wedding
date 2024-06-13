@@ -19,6 +19,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure container fills the viewport height */
+    padding-bottom: 60px; /* Adjust as necessary to prevent footer overlap */
+    box-sizing: border-box;
+    position: relative; /* Ensure relative positioning for child elements */
 }
 nav {
     position: fixed;

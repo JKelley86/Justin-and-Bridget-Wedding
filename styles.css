@@ -4,14 +4,13 @@ html, body {
     display: flex; /* Enables flexbox layout */
     flex-direction: column; /* Makes the content flow vertically */
 }
+
 body {
     text-align: center;
-    background-size: cover;
     color: white;
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
 }
+
 nav {
     position: fixed;
     top: 0;
@@ -22,30 +21,32 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+    z-index: 1000; /* Ensure the nav is always on top */
 }
-    nav ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        display: flex; /* Use flexbox to align items horizontally */
-    }
 
-        nav ul li {
-            margin-right: 20px; /* Add some spacing between the items */
-        }
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Use flexbox to align items horizontally */
+}
 
-            nav ul li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-                background-color: transparent;
-            }
+nav ul li {
+    margin-right: 20px; /* Add some spacing between the items */
+}
 
-                nav ul li a:hover {
-                    background-color: gray;
-                }
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+nav ul li a:hover {
+    background-color: gray;
+}
 
 .navbar-right {
     margin-right: 50px; /* Adjust the right margin as needed */
@@ -53,19 +54,19 @@ nav {
 
 main {
     flex: 1; /* This makes the main content area flexible, so it grows and shrinks as needed */
-    padding: 90px;
-    font-size: 30px;
+    padding: 90px 20px;
+    font-size: 20px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-
+    box-sizing: border-box;
 }
 
 footer {
     background-color: black;
     color: white;
     text-align: center;
-    padding: 1px;
+    padding: 10px;
+    font-size: 14px;
     width: 100%;
-    font-size: 10px;
 }

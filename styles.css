@@ -113,7 +113,7 @@ footer {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center top; /* Change to adjust the position of the background image */
-    padding-top: 50px; /* Adjust this value to move the image down */
+    padding-top: 10px; /* Adjust this value to move the image down */
 }
 /* Media Queries */
 @media (max-width: 768px) {

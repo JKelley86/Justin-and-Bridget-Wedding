@@ -1,47 +1,130 @@
-<!DOCTYPE html>
-<html lang="en"> 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Justin & Bridget's Wedding</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body style="background-image: url('picture1.jpeg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
- <div class="container">
-    <nav>
-        <ul class="navbar-left">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="location.html">Location</a></li>
-            <li><a href="rsvp.html">RSVP</a></li>
-        </ul>
-        <div class="navbar-right">
-            <span class="navbar-text">Justin & Bridget's Wedding</span>
-        </div>
-    </nav>
+/* Global styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+}
 
-    <main>
-        <h1>Welcome to Justin & Bridget’s Wedding Website!</h1>
-        <p>This is the homepage of our wedding website. We're excited to celebrate our special day with you!</p>
-        
-        <section>
-            <h2>Bridget's Story</h2>
-            <p>Story about Bridget</p>
-        </section>
+body {
+    text-align: center;
+    margin: 0; /* Reset default body margin */
+}
 
-        <section>
-            <h2>Justin's Story</h2>
-            <p>Story about Justin</p>
-        </section>
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure container fills the viewport height */
+    padding-bottom: 60px; /* Adjust as necessary to prevent footer overlap */
+    box-sizing: border-box;
+    position: relative; /* Ensure relative positioning for child elements */
+}
 
-        <section>
-            <h2>Our Story</h2>
-            <p>Story about both of us</p>
-        </section>
-    </main>
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Adjusted padding */
+    z-index: 1000;
+}
 
-    <footer> 
-        <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
-    </footer> 
- </div>
-</body>
-</html>
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 10px; /* Reduced margin */
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 12px 16px; /* Adjusted padding */
+    text-decoration: none;
+    background-color: transparent;
+    font-size: 16px; /* Adjusted font size */
+}
+
+nav ul li a:hover {
+    background-color: gray;
+}
+
+.navbar-right {
+    margin-right: 25px; /* Adjusted margin */
+    font-size: 16px; /* Adjusted font size */
+}
+
+main {
+    flex: 1;
+    padding: 90px 20px; /* Adjusted padding */
+    font-size: 20px; /* Adjusted font size */
+    box-sizing: border-box;
+    margin-bottom: 30px; /* Increased margin between sections */
+}
+
+section {
+    margin-bottom: 40px; /* Adjusted margin between sections */
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px; /* Adjusted padding */
+    font-size: 16px; /* Adjusted font size */
+    width: 100%;
+    position: absolute; /* Position absolutely */
+    bottom: 0; /* Stick to the bottom */
+    left: 0; /* Ensure it starts from the left edge */
+    right: 0; /* Ensure it ends at the right edge */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    nav {
+        padding: 8px 12px;
+    }
+
+    nav ul li {
+        margin-right: 4px;
+    }
+
+    nav ul li a {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .navbar-right {
+        margin-right: 15px;
+        font-size: 14px;
+    }
+
+    main {
+        padding: 60px 12px; /* Adjusted padding */
+        font-size: 16px; /* Adjusted font size */
+        margin-bottom: 20px; /* Adjusted margin */
+    }
+
+    section {
+        margin-bottom: 20px; /* Adjusted margin between sections */
+    }
+
+    footer {
+        padding: 8px; /* Adjusted padding */
+        font-size: 14px; /* Adjusted font size */
+    }
+}

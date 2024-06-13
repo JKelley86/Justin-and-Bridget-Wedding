@@ -77,7 +77,7 @@ main {
 }
 
 h1, h2 {
-    color: black; /* Override text color for headers */
+    color: white; /* Override text color for headers */
 }
 
 ul {

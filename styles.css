@@ -24,6 +24,7 @@ body {
     position: relative; /* Ensure relative positioning for child elements */
     overflow-x: hidden; /* Hide horizontal overflow */
     overflow-y: auto; /* Enable vertical scrolling when content exceeds viewport */
+    flex: 1; /* Allow container to grow and shrink */
 }
 
 nav {
@@ -54,15 +55,18 @@ nav ul li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 12px 16px; /* Adjusted padding */
+    padding: 12px 20px; /* Adjusted padding */
     text-decoration: none;
     background-color: transparent;
     font-size: 16px; /* Adjusted font size */
-    border-color: white; /* White border color on hover */
+    border: 2px solid transparent; /* Add transparent border initially */
+    border-radius: 4px; /* Add border radius for rounded corners */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
 }
 
 nav ul li a:hover {
-    background-color: gray;
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background on hover */
+    border-color: white; /* White border color on hover */
 }
 
 .navbar-right {
@@ -79,18 +83,20 @@ main {
 }
 
 h1, h2 {
-    color: white; /* Override text color for headers */
+    color: black; /* Override text color for headers */
 }
 
 ul {
     list-style-type: none;
     padding: 0;
 }
+
 iframe {
     width: 100%; /* Ensure the iframe fills its container */
     height: 100%; /* Ensure the iframe fills its container */
     border: none; /* Remove default border */
 }
+
 footer {
     background-color: black;
     color: white;
@@ -98,10 +104,8 @@ footer {
     padding: 10px; /* Adjusted padding */
     font-size: 16px; /* Adjusted font size */
     width: 100%;
-    position: absolute; /* Position absolutely */
-    bottom: 0; /* Stick to the bottom */
-    left: 0; /* Ensure it starts from the left edge */
-    right: 0; /* Ensure it ends at the right edge */
+    position: relative; /* Change to relative */
+    margin-top: auto; /* Push footer to the bottom of the container */
 }
 
 /* Media Queries */
@@ -115,7 +119,7 @@ footer {
     }
 
     nav ul li a {
-        padding: 10px 12px;
+        padding: 10px 16px; /* Adjusted padding */
         font-size: 14px;
     }
 
@@ -128,14 +132,6 @@ footer {
         padding: 60px 12px; /* Adjusted padding */
         font-size: 16px; /* Adjusted font size */
         margin-bottom: 20px; /* Adjusted margin */
-    }
-
-    p {
-        margin-bottom: 20px; /* Adjusted margin */
-    }
-
-    span {
-        margin-bottom: 8px; /* Adjusted margin */
     }
 
     footer {

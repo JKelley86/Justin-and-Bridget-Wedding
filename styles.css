@@ -84,7 +84,11 @@ ul {
     list-style-type: none;
     padding: 0;
 }
-
+iframe {
+    width: 100%; /* Ensure the iframe fills its container */
+    height: 100%; /* Ensure the iframe fills its container */
+    border: none; /* Remove default border */
+}
 footer {
     background-color: black;
     color: white;

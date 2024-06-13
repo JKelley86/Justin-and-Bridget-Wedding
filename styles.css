@@ -82,6 +82,10 @@ footer {
     padding: 10px; /* Adjusted padding */
     font-size: 16px; /* Adjusted font size */
     width: 100%;
+    position: fixed; /* Fixed position */
+    bottom: 0; /* Stick to the bottom */
+    left: 0; /* Ensure it starts from the left edge */
+    right: 0; /* Ensure it ends at the right edge */
 }
 
 /* Media Queries */

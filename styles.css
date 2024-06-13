@@ -63,6 +63,7 @@ main {
     padding: 90px 20px; /* Adjusted padding */
     font-size: 20px; /* Adjusted font size */
     box-sizing: border-box;
+    margin-bottom: 30px; /* Increased margin between sections */
 }
 
 p {

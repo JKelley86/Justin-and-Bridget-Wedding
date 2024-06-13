@@ -23,7 +23,6 @@ body {
     box-sizing: border-box;
     position: relative; /* Ensure relative positioning for child elements */
     overflow-x: hidden; /* Hide horizontal overflow */
-    overflow-y: auto; /* Enable vertical scrolling when content exceeds viewport */
 }
 
 nav {
@@ -93,7 +92,7 @@ footer {
     padding: 10px; /* Adjusted padding */
     font-size: 16px; /* Adjusted font size */
     width: 100%;
-    position: sticky; /* Position sticky */
+    position: fixed; /* Position fixed */
     bottom: 0; /* Stick to the bottom */
     left: 0; /* Ensure it starts from the left edge */
     right: 0; /* Ensure it ends at the right edge */

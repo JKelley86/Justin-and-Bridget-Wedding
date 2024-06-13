@@ -67,7 +67,9 @@ main {
 p {
     margin-bottom: 20px;
 }
-
+span {
+    margin-bottom: 1px;
+}
 footer {
     background-color: black;
     color: white;

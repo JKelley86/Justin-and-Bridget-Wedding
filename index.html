@@ -1,130 +1,64 @@
-/* Global styles */
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, sans-serif;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    color: white;
-}
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Justin & Bridget's Wedding</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-image: url('picture1.jpeg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+ <div class="container">
+    <nav>
+        <ul class="navbar-left">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="location.html">Location</a></li>
+            <li><a href="rsvp.html">RSVP</a></li>
+        </ul>
+        <div class="navbar-right">
+            <span class="navbar-text">Justin & Bridget's Wedding</span>
+        </div>
+    </nav>
 
-body {
-    text-align: center;
-    margin: 0; /* Reset default body margin */
-}
+    <main>
+        <h1>Welcome to Justin & Bridget’s Wedding Website!</h1>
+        <p>This is the homepage of our wedding website. We're excited to celebrate our special day with you!</p>
+        
+        <section>
+            <h2>Bridget's Story</h2>
+            <p>Story about Bridget</p>
+        </section>
 
-.container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensure container fills the viewport height */
-    padding-bottom: 60px; /* Adjust as necessary to prevent footer overlap */
-    box-sizing: border-box;
-    position: relative; /* Ensure relative positioning for child elements */
-}
+        <section>
+            <h2>Justin's Story</h2>
+            <p>Story about Justin</p>
+        </section>
 
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px; /* Adjusted padding */
-    z-index: 1000;
-}
+        <section>
+            <h2>Our Story</h2>
+            <p>Once upon a time, in a third-grade classroom filled with crayon drawings and playground adventures, Bridget and Justin first crossed paths. They were just kids, oblivious to the future that awaited them.
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
+Their friendship blossomed effortlessly, marked by shared laughs and secret handshakes during recess. By fifth grade, something more than friendship stirred between them, and they timidly held hands during field trips. But life had other plans, and Bridget moved away in sixth grade, leaving behind a void in Justin's world.
 
-nav ul li {
-    margin-right: 10px; /* Reduced margin */
-}
+Years passed. Fate, however, had a reunion in store. In the eleventh grade, amidst the chaos of high school hallways and football games, their paths intersected again. This time, it was different. They found themselves drawn to each other once more, discovering newfound commonalities like a shared love for the outdoors and camping under starlit skies.
 
-nav ul li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 12px 16px; /* Adjusted padding */
-    text-decoration: none;
-    background-color: transparent;
-    font-size: 16px; /* Adjusted font size */
-}
+Their friendship quickly reignited into something deeper. Finally, on a chilly January night in 2021, under the twinkling canopy of stars during one of their camping trips, Justin gathered his courage and asked Bridget to be his partner in life. Without hesitation, Bridget said yes, sealing their bond amidst the quiet serenity of nature.</p>
+ As their love story continued to unfold, Bridget and Justin found themselves standing at a new crossroads of their relationship. After years of shared adventures and growing closer with each passing day, Justin knew it was time to take their commitment to the next level.
 
-nav ul li a:hover {
-    background-color: gray;
-}
+It was a sunny March afternoon on Sanibel Island, Florida, where the gentle waves kissed the shore and seagulls danced in the breeze. Justin had planned the perfect getaway, a romantic escape that would forever change their lives. With the sun beginning its descent over the horizon, casting a golden hue across the beach, Justin knelt down on one knee and presented Bridget with a ring that sparkled as brightly as the love they shared.
 
-.navbar-right {
-    margin-right: 25px; /* Adjusted margin */
-    font-size: 16px; /* Adjusted font size */
-}
+Overwhelmed with joy and emotion, Bridget said yes without hesitation, her heart overflowing with happiness. On that serene beach, amidst the whispers of the sea and the promise of a future together, they embraced, knowing that their love had found its perfect moment.
 
-main {
-    flex: 1;
-    padding: 90px 20px; /* Adjusted padding */
-    font-size: 20px; /* Adjusted font size */
-    box-sizing: border-box;
-    margin-bottom: 30px; /* Increased margin between sections */
-}
+Since that unforgettable day on Sanibel Island, Bridget and Justin have eagerly embarked on planning their future together. Their engagement symbolizes not only their deep commitment to each other but also the continuation of a journey that began long ago in a third-grade classroom and endured through distance, reunions, and countless shared experiences.
 
-section {
-    margin-bottom: 40px; /* Adjusted margin between sections */
-}
+As they look forward to their wedding day and beyond, Bridget and Justin remain grateful for the twists of fate and the cherished moments that have woven their story together. With each passing day, their love grows stronger, fueled by the memories of their past and the dreams they hold for their future.
 
-footer {
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 10px; /* Adjusted padding */
-    font-size: 16px; /* Adjusted font size */
-    width: 100%;
-    position: absolute; /* Position absolutely */
-    bottom: 0; /* Stick to the bottom */
-    left: 0; /* Ensure it starts from the left edge */
-    right: 0; /* Ensure it ends at the right edge */
-}
+Here's to Bridget and Justin, whose love story continues to unfold with grace, joy, and the promise of a lifetime of happiness together.       
+        </section>
+    </main>
 
-/* Media Queries */
-@media (max-width: 768px) {
-    nav {
-        padding: 8px 12px;
-    }
-
-    nav ul li {
-        margin-right: 4px;
-    }
-
-    nav ul li a {
-        padding: 10px 12px;
-        font-size: 14px;
-    }
-
-    .navbar-right {
-        margin-right: 15px;
-        font-size: 14px;
-    }
-
-    main {
-        padding: 60px 12px; /* Adjusted padding */
-        font-size: 16px; /* Adjusted font size */
-        margin-bottom: 20px; /* Adjusted margin */
-    }
-
-    section {
-        margin-bottom: 20px; /* Adjusted margin between sections */
-    }
-
-    footer {
-        padding: 8px; /* Adjusted padding */
-        font-size: 14px; /* Adjusted font size */
-    }
-}
+    <footer> 
+        <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
+    </footer> 
+ </div>
+</body>
+</html>

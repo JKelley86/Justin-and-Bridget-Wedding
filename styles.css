@@ -58,6 +58,7 @@ nav ul li a {
     text-decoration: none;
     background-color: transparent;
     font-size: 16px; /* Adjusted font size */
+    border-color: white; /* White border color on hover */
 }
 
 nav ul li a:hover {

@@ -91,22 +91,22 @@ footer {
     }
 
     nav ul li {
-        margin-right: 6px;
+        margin-right: 4px;
     }
 
     nav ul li a {
-        padding: 8px 10px;
-        font-size: 12px;
+        padding: 6px 8px;
+        font-size: 10px;
     }
 
     .navbar-right {
-        margin-right: 8px;
-        font-size: 12px;
+        margin-right: 6px;
+        font-size: 10px;
     }
 
     main {
-        padding: 50px 12px;
-        font-size: 16px;
+        padding: 40px 12px;
+        font-size: 12px;
     }
 
     p {

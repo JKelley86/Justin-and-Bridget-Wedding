@@ -107,7 +107,14 @@ footer {
     margin-top: auto; /* Push footer to the bottom of the container */
     position: relative; /* Ensure footer is relative to the container */
 }
-
+/* RSVP specific styles */
+.rsvp-body {
+    background-image: url('picture3.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top; /* Change to adjust the position of the background image */
+    padding-top: 50px; /* Adjust this value to move the image down */
+}
 /* Media Queries */
 @media (max-width: 768px) {
     nav {

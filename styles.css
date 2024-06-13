@@ -22,6 +22,8 @@ body {
     min-height: 100vh; /* Ensure container fills the viewport height */
     box-sizing: border-box;
     position: relative; /* Ensure relative positioning for child elements */
+    overflow-x: hidden; /* Hide horizontal overflow */
+    overflow-y: auto; /* Enable vertical scrolling when content exceeds viewport */
 }
 
 nav {
@@ -75,12 +77,13 @@ main {
     margin-bottom: 30px; /* Increased margin between sections */
 }
 
-p {
-    margin-bottom: 40px;
+h1, h2 {
+    color: black; /* Override text color for headers */
 }
 
-span {
-    margin-bottom: 10px; /* Adjusted margin */
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
 footer {

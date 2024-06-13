@@ -23,6 +23,7 @@ body {
     box-sizing: border-box;
     position: relative; /* Ensure relative positioning for child elements */
     overflow-x: hidden; /* Hide horizontal overflow */
+    overflow-y: auto; /* Enable vertical scrolling when content exceeds viewport */
 }
 
 nav {

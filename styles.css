@@ -1,3 +1,9 @@
+html, body {
+    height: 100%; /* Ensures the body takes the full height of the viewport */
+    margin: 0; /* Removes default margin */
+    display: flex; /* Enables flexbox layout */
+    flex-direction: column; /* Makes the content flow vertically */
+}
 body {
     text-align: center;
     background-size: cover;

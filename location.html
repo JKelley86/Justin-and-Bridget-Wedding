@@ -15,7 +15,7 @@
             <li><a href="rsvp.html">RSVP</a></li>
         </ul>
         <div class="navbar-right">
-            <span class="navbar-text">Justin & Bridget's Wedding</span>
+            <span class="navbar-text" id="secret-button" style="cursor: pointer;">Justin & Bridget's Wedding</span>
         </div>
     </nav>  
 
@@ -51,5 +51,15 @@
         <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
     </footer> 
   </div>
+ <script>
+    document.getElementById("secret-button").onclick = function() {
+        var password = prompt("Please enter the password to view this page:");
+        if (password === "6552") { // Replace with your actual password
+            window.location.href = "secret.html"; // Redirect to the secret page
+        } else {
+            alert("Incorrect password.");
+        }
+    };
+ </script>
 </body>
 </html>

@@ -112,7 +112,7 @@ footer {
     background-image: url('picture3.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
- background-position: center -500px; /* Adjust the vertical position of the background image */
+ background-position: center 10px; /* Adjust the vertical position of the background image */
 }
 /* Media Queries */
 @media (max-width: 768px) {

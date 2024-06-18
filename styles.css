@@ -10,7 +10,14 @@ html, body {
     background-position: center;
     color: white;
 }
-
+<style>
+        @font-face {
+            font-family: 'Fairwater Script';
+            src: url('FairwaterScript.woff2') format('woff2'), /* Update this to the correct file format and path */
+                 url('FairwaterScript.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
 body {
     text-align: center;
     margin: 0; /* Reset default body margin */
@@ -85,7 +92,7 @@ main {
 h1, h2 {
     color: white; /* Override text color for headers */
      text-align: center;
-    font-family: Fairwater Script;
+font-family: 'Fairwater Script', 'Comic Sans MS', Cursive;
 }
 
 ul {

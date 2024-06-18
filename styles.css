@@ -84,6 +84,8 @@ main {
 
 h1, h2 {
     color: white; /* Override text color for headers */
+     text-align: center;
+    font-family: "Brush Script MT", "Comic Sans MS", Cursive;
 }
 
 ul {

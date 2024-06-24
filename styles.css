@@ -9,6 +9,7 @@ html, body {
     background-repeat: no-repeat;
     background-position: center;
     color: white;
+    overflow: hidden;
 }
 <style>
         @font-face {
@@ -32,6 +33,7 @@ body {
     overflow-x: hidden; /* Hide horizontal overflow */
     overflow-y: auto; /* Enable vertical scrolling when content exceeds viewport */
     flex: 1; /* Allow container to grow and shrink */
+    height: 100vh;
 }
 
 nav {

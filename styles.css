@@ -101,7 +101,18 @@ ul {
     list-style-type: none;
     padding: 0;
 }
-
+section {
+    padding: 20px;
+}
+li {
+     margin: 5px 0;
+ }
+li ul {
+     margin-left: 20px;
+ }
+li ul li {
+      list-style-type: lower-alpha;
+ }
 iframe {
     width: 100%; /* Ensure the iframe fills its container */
     height: 100%; /* Ensure the iframe fills its container */

@@ -96,6 +96,17 @@ h1, h2 {
      text-align: center;
 font-family: 'Fairwater Script', 'Comic Sans MS', Cursive;
 }
+.main-list {
+    list-style-type: none; /* Remove default list styles for main list */
+    padding: 0;
+    margin-left: 0; /* Align main list to the left */
+}
+
+.sub-list {
+    list-style-type: lower-alpha; /* Different list style for sublist */
+    margin-left: 20px; /* Indent the sublist */
+    padding-left: 20px; /* Additional padding for the sublist */
+}
 
 ul {
     list-style-type: none;
@@ -106,10 +117,6 @@ section {
 }
 li {
      margin: 5px 0;
- }
-li ul {
-     list-style-type: lower-alpha; /* Different list style for sublist */
-     margin-left: 20px;
  }
 
 iframe {

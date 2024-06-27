@@ -108,11 +108,10 @@ li {
      margin: 5px 0;
  }
 li ul {
+     list-style-type: lower-alpha; /* Different list style for sublist */
      margin-left: 20px;
  }
-li ul li {
-      list-style-type: lower-alpha;
- }
+
 iframe {
     width: 100%; /* Ensure the iframe fills its container */
     height: 100%; /* Ensure the iframe fills its container */

@@ -104,7 +104,7 @@ font-family: 'Fairwater Script', 'Comic Sans MS', Cursive;
 
 .sub-list {
     list-style-type: lower-alpha; /* Different list style for sublist */
-    margin-left: 20px; /* Indent the sublist */
+    margin-left: 40px; /* Indent the sublist */
     padding-left: 20px; /* Additional padding for the sublist */
 }
 

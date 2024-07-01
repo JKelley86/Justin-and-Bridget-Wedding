@@ -20,8 +20,8 @@
     </nav>
 
     <main>
-        <h2>RSVP Form</h2>
-        <p>Please fill out the form to submit your RSVP</p>
+        <h2>Missing Names Form Form</h2>
+        <p>Please fill out the form to submit any names we might have missed</p>
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcZcwuJEZ936d_TN-1H8QPlwqlYrOgOpiXeBYdkxjyxJ-fnw/viewform?embedded=true" width="640" height="419" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <div class="back-button-container">
                 <button onclick="goBack()" class="back-button">Back to Secret Page</button>
@@ -33,14 +33,6 @@
     </footer> 
   </div>
  <script>
-    document.getElementById("secret-button").onclick = function() {
-        var password = prompt("Please enter the password to view this page:");
-        if (password === "6552") { // Replace with your actual password
-            window.location.href = "secret.html"; // Redirect to the secret page
-        } else {
-            alert("Incorrect password.");
-        }
-    };
         function goBack() {
             window.location.href = "secret.html";
         }

@@ -12,6 +12,68 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        li {
+            margin: 0 10px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .back-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-button {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Centered text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Make the link block-level */
+            font-size: 16px; /* Increase font size */
+            border: none; /* Remove border */
+            cursor: pointer; /* Pointer/hand icon on hover */
+            border-radius: 5px; /* Rounded corners */
+        }
+        .back-button:hover {
+            background-color: #45a049; /* Darker green background on hover */
         }
         table {
             width: 100%;
@@ -25,9 +87,6 @@
         }
         th {
             background-color: transparent;
-        }
-        h1, h2 {
-            text-align: center;
         }
         .additional-info {
             display: none;
@@ -45,29 +104,28 @@
             <div class="navbar-right">Justin & Bridget's Wedding</div>
         </nav>
 
-    <main>
-        <h2>Missing Names Form</h2>
-        <p>Please fill out the form to submit any names we might have missed</p>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcZcwuJEZ936d_TN-1H8QPlwqlYrOgOpiXeBYdkxjyxJ-fnw/viewform?embedded=true" width="640" height="419" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-        <div class="back-button-container">
-            <button onclick="goBack()" class="back-button">Back to Secret Page</button>
-        </div>
+        <main>
+            <h2>Missing Names Form</h2>
+            <p>Please fill out the form to submit any names we might have missed</p>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcZcwuJEZ936d_TN-1H8QPlwqlYrOgOpiXeBYdkxjyxJ-fnw/viewform?embedded=true" width="640" height="419" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <div class="back-button-container">
+                <button onclick="goBack()" class="back-button">Back to Secret Page</button>
+            </div>
             <h3>Added Names</h3>
-        <table id="data-table-1">
-            <thead>
-                <tr id="table-header-1"></tr>
-            </thead>
-            <tbody id="table-body-1"></tbody>
-        </table>
+            <table id="data-table-1">
+                <thead>
+                    <tr id="table-header-1"></tr>
+                </thead>
+                <tbody id="table-body-1"></tbody>
+            </table>
+        </main>
 
-    </main>
-
-    <footer> 
-        <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
-    </footer> 
-  </div>
- <script>
-             fetch('config.json')
+        <footer> 
+            <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
+        </footer>
+    </div>
+    <script>
+        fetch('config.json')
             .then(response => response.json())
             .then(config => {
                 gapi.load('client', start);
@@ -89,7 +147,7 @@
                 function fetchSheetData(config) {
                     gapi.client.sheets.spreadsheets.values.get({
                         spreadsheetId: config.googleSheetsID,
-                        range: 'Missing Names'!C2:C71',
+                        range: 'Missing Names!C2:C71',
                     }).then(function(response) {
                         const data = response.result.values;
                         console.log('Pricing Data:', data);
@@ -97,10 +155,12 @@
                     }).catch(function(error) {
                         console.error('Error fetching Pricing sheet:', error.result.error.message);
                     });
+                }
+            });
 
         function goBack() {
             window.location.href = "secret.html";
         }
- </script>
+    </script>
 </body>
 </html>

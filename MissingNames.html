@@ -28,7 +28,6 @@
             <button onclick="goBack()" class="back-button">Back to Secret Page</button>
         </div>
             <h3>Added Names</h3>
-        <p>Click on any cell to expand</p>
         <table id="data-table-1">
             <thead>
                 <tr id="table-header-1"></tr>
@@ -43,6 +42,37 @@
     </footer> 
   </div>
  <script>
+             fetch('config.json')
+            .then(response => response.json())
+            .then(config => {
+                gapi.load('client', start);
+
+                function start() {
+                    gapi.client.init({
+                        apiKey: config.googleSheetsApiKey,
+                        discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+                    }).then(function() {
+                        console.log('Google API client initialized.');
+
+                        // Fetch data from Google Sheets
+                        fetchSheetData(config);
+                    }).catch(function(error) {
+                        console.error('Error initializing Google API client:', error.result.error.message);
+                    });
+                }
+
+                function fetchSheetData(config) {
+                    gapi.client.sheets.spreadsheets.values.get({
+                        spreadsheetId: config.googleSheetsID,
+                        range: 'Missing Names'!C2:C71',
+                    }).then(function(response) {
+                        const data = response.result.values;
+                        console.log('Pricing Data:', data);
+                        populateTableWithExpandableRows(data, 'table-header-1', 'table-body-1');
+                    }).catch(function(error) {
+                        console.error('Error fetching Pricing sheet:', error.result.error.message);
+                    });
+
         function goBack() {
             window.location.href = "secret.html";
         }

@@ -167,4 +167,25 @@ footer {
         padding: 8px; /* Adjusted padding */
         font-size: 14px; /* Adjusted font size */
     }
+    .back-button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the link block-level */
+    font-size: 16px; /* Increase font size */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer/hand icon on hover */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.back-button:hover {
+    background-color: #45a049; /* Darker green background on hover */
+}
 }

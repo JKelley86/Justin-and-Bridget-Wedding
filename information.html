@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheets Data</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/spotify-web-api-js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <style>
+        body {
+            background-image: url('picture5.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: transparent;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+      </style>
+    </head>
+  <body>
+    <div class="container">
+        <nav>
+            <ul class="navbar-left">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="location.html">Info</a></li>
+                <li><a href="rsvp.html">RSVP</a></li>
+            </ul>
+            <div class="navbar-right">Justin & Bridget's Wedding</div>
+        </nav>
+        <h2>Google Sheets Data</h2>
+
+        <h3>Pricing</h3>
+        <p>Click on any cell to expand</p>
+        <table id="data-table-1">
+            <thead>
+                <tr id="table-header-1"></tr>
+            </thead>
+            <tbody id="table-body-1"></tbody>
+        </table>
+
+        <h3>Guest List</h3>
+        <table id="data-table-2">
+            <thead>
+                <tr id="table-header-2"></tr>
+            </thead>
+            <tbody id="table-body-2"></tbody>
+        </table>
+        <footer>
+            <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
+        </footer>
+    </div>

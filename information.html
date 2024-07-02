@@ -30,9 +30,9 @@
         h1, h2 {
             text-align: center;
         }
-      </style>
-    </head>
-  <body>
+    </style>
+</head>
+<body>
     <div class="container">
         <nav>
             <ul class="navbar-left">
@@ -60,7 +60,7 @@
             </thead>
             <tbody id="table-body-2"></tbody>
         </table>
-        
+
         <h3>Schedule</h3>
         <table id="data-table-3">
             <thead>
@@ -98,10 +98,10 @@
                         range: 'Main!B2:C8',
                     }).then(function(response) {
                         const data = response.result.values;
-                        console.log('Pricing Data:', data);
-                        populateTableWithExpandableRows(data, 'table-header-1', 'table-body-1');
+                        console.log('Details Data:', data);
+                        populateTable(data, 'table-header-1', 'table-body-1');
                     }).catch(function(error) {
-                        console.error('Error fetching Pricing sheet:', error.result.error.message);
+                        console.error('Error fetching Details sheet:', error.result.error.message);
                     });
 
                     gapi.client.sheets.spreadsheets.values.get({
@@ -109,10 +109,10 @@
                         range: 'Main!E2:H8',
                     }).then(function(response) {
                         const data = response.result.values;
-                        console.log('Guest List Data:', data);
+                        console.log('Walk Down Order Data:', data);
                         populateTable(data, 'table-header-2', 'table-body-2');
                     }).catch(function(error) {
-                        console.error('Error fetching Guest List sheet:', error.result.error.message);
+                        console.error('Error fetching Walk Down Order sheet:', error.result.error.message);
                     });
 
                     gapi.client.sheets.spreadsheets.values.get({
@@ -120,12 +120,38 @@
                         range: 'Main!J2:K14',
                     }).then(function(response) {
                         const data = response.result.values;
-                        console.log('Guest List Data:', data);
-                        populateTable(data, 'table-header-2', 'table-body-2');
+                        console.log('Schedule Data:', data);
+                        populateTable(data, 'table-header-3', 'table-body-3');
                     }).catch(function(error) {
-                        console.error('Error fetching Guest List sheet:', error.result.error.message);
+                        console.error('Error fetching Schedule sheet:', error.result.error.message);
                     });
-                
-        </script>
-    </body>
+                }
+
+                function populateTable(data, headerId, bodyId) {
+                    const tableHeader = document.getElementById(headerId);
+                    const tableBody = document.getElementById(bodyId);
+
+                    tableHeader.innerHTML = '';
+                    tableBody.innerHTML = '';
+
+                    const headers = data[0];
+                    headers.forEach(header => {
+                        const th = document.createElement('th');
+                        th.textContent = header;
+                        tableHeader.appendChild(th);
+                    });
+
+                    for (let i = 1; i < data.length; i++) {
+                        const tr = document.createElement('tr');
+                        data[i].forEach(cell => {
+                            const td = document.createElement('td');
+                            td.textContent = cell;
+                            tr.appendChild(td);
+                        });
+                        tableBody.appendChild(tr);
+                    }
+                }
+            });
+    </script>
+</body>
 </html>

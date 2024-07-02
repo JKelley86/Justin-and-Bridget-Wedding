@@ -143,7 +143,7 @@
                 function fetchSheetData(config) {
                     gapi.client.sheets.spreadsheets.values.get({
                         spreadsheetId: config.googleSheetsID,
-                        range: 'Missing Names!C1:C71',
+                        range: 'Missing Names!C2:C71',
                     }).then(function(response) {
                         const data = response.result.values;
                         console.log('Fetched Data:', data);

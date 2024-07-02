@@ -87,6 +87,10 @@
         .additional-info {
             display: none;
         }
+        iframe {
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -100,7 +104,7 @@
             <div class="navbar-right">Justin & Bridget's Wedding</div>
         </nav>
 
-    <main>
+        <main>
             <h1>Missing Names Form</h1>
             <p>Please fill out the form to submit any names we might have missed</p>
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcZcwuJEZ936d_TN-1H8QPlwqlYrOgOpiXeBYdkxjyxJ-fnw/viewform?embedded=true" width="640" height="419" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
@@ -114,8 +118,7 @@
                 </thead>
                 <tbody id="table-body-1"></tbody>
             </table>
-        <p></p>
-     </main>
+        </main>
     </div>
     <script>
         fetch('config.json')

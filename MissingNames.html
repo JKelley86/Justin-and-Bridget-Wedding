@@ -112,6 +112,9 @@
                 </thead>
                 <tbody id="table-body-1"></tbody>
             </table>
+            <div class="button-container">
+                <button onclick="refreshPage()" class="button">Refresh Page</button>
+            </div>
          <p></p>
         </main>
          <footer>
@@ -178,6 +181,9 @@
         function goBack() {
             window.location.href = "secret.html";
         }
+         function refreshPage() {
+            location.reload();
+        }      
     </script>
 </body>
 </html>

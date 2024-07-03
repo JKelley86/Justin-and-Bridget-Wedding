@@ -95,7 +95,7 @@
                 function fetchSheetData(config) {
                     gapi.client.sheets.spreadsheets.values.get({
                         spreadsheetId: config.googleSheetsID,
-                        range: 'Main!B2:C8',
+                        range: 'Main!B3:C8',
                     }).then(function(response) {
                         const data = response.result.values;
                         console.log('Details Data:', data);
@@ -106,7 +106,7 @@
 
                     gapi.client.sheets.spreadsheets.values.get({
                         spreadsheetId: config.googleSheetsID,
-                        range: 'Main!E2:H8',
+                        range: 'Main!E3:H8',
                     }).then(function(response) {
                         const data = response.result.values;
                         console.log('Walk Down Order Data:', data);
@@ -117,7 +117,7 @@
 
                     gapi.client.sheets.spreadsheets.values.get({
                         spreadsheetId: config.googleSheetsID,
-                        range: 'Main!J2:K14',
+                        range: 'Main!J3:K14',
                     }).then(function(response) {
                         const data = response.result.values;
                         console.log('Schedule Data:', data);

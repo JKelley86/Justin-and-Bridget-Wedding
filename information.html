@@ -15,7 +15,7 @@
             background-position: center;
         }
         table {
-            width: 100%;
+            width: 50%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
@@ -106,7 +106,7 @@
 
                     gapi.client.sheets.spreadsheets.values.get({
                         spreadsheetId: config.googleSheetsID,
-                        range: 'Main!E3:H8',
+                        range: 'Main!F3:H8',
                     }).then(function(response) {
                         const data = response.result.values;
                         console.log('Walk Down Order Data:', data);

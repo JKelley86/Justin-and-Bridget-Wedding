@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing Names Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <style>
+        body {
+            background-image: url('picture4.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        li {
+            margin: 0 10px;
+        }
+        a {
+            text-decoration: none;
+            color: black; /* Adjust text color */
+        }
+        main {
+            flex: 1;
+            padding: 40px;
+            /* Removed background property */
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            color: White; /* Adjust text color */
+            width: 100%;
+            margin-top: auto; /* Push footer to the bottom of the container */
+            position: relative; /* Ensure footer is relative to the container */
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        iframe {
+            width: 100%; /* Ensure the iframe fills its container */
+            height: 550px; /* Ensure the iframe fills its container */
+            border: none; /* Remove default border */
+            display: block;
+            margin: 0 auto;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .button {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Centered text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Make the link block-level */
+            font-size: 16px; /* Increase font size */
+            border: none; /* Remove border */
+            cursor: pointer; /* Pointer/hand icon on hover */
+            border-radius: 5px; /* Rounded corners */
+        }
+        .button:hover {
+            background-color: #45a049; /* Darker green background on hover */
+        }
+        table {
+            width: 50%; /* Set table width */
+            border-collapse: collapse;
+            margin: 20px auto; /* Center table horizontally */
+            color: rgb(255, 255, 255)
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: transparent;
+        }
+        .additional-info {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul class="navbar-left">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="location.html">Info</a></li>
+                <li><a href="rsvp.html">RSVP</a></li>
+            </ul>
+            <div class="navbar-right">Justin & Bridget's Wedding</div>
+        </nav>
+
+        <main>
+            <h1>Missing Names Form</h1>
+            <p>Please fill out the form to submit any names we might have missed</p>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfiPFt4XllqADn8F4ejHFiwhr8bZY2J_a2IxbWLw9Koodp4NA/viewform?usp=sf_link" width="640" height="419" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <div class="back-button-container">
+                <button onclick="goBack()" class="button">Back to Main Page</button>
+            </div>
+            <h2>Added Names</h2>
+            <table id="data-table-1">
+                <thead>
+                    <tr id="table-header-1"></tr>
+                </thead>
+                <tbody id="table-body-1"></tbody>
+            </table>
+            <div class="button-container">
+                <button onclick="refreshPage()" class="button">Refresh Page</button>
+            </div>
+        </main>
+         <footer>
+            <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
+        </footer>
+    </div>
+    <script>
+        fetch('config.json')
+            .then(response => response.json())
+            .then(config => {
+                gapi.load('client', start);
+
+                function start() {
+                    gapi.client.init({
+                        apiKey: config.googleSheetsApiKey,
+                        discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+                    }).then(function() {
+                        console.log('Google API client initialized.');
+
+                        // Fetch data from Google Sheets
+                        fetchSheetData(config);
+                    }).catch(function(error) {
+                        console.error('Error initializing Google API client:', error.result.error.message);
+                    });
+                }
+
+                function fetchSheetData(config) {
+                    gapi.client.sheets.spreadsheets.values.get({
+                        spreadsheetId: config.googleSheetsID,
+                        range: 'Missing Names!C2:C71',
+                    }).then(function(response) {
+                        const data = response.result.values;
+                        console.log('Fetched Data:', data);
+                        populateTableWithExpandableRows(data, 'table-header-1', 'table-body-1');
+                    }).catch(function(error) {
+                        console.error('Error fetching data from sheet:', error.result.error.message);
+                    });
+                }
+
+                function populateTableWithExpandableRows(data, headerId, bodyId) {
+                    const headerRow = document.getElementById(headerId);
+                    const bodyRow = document.getElementById(bodyId);
+
+                    // Assuming the first row contains headers
+                    const headers = ["Name"]; // Adjust headers if necessary
+                    headers.forEach(header => {
+                        const th = document.createElement('th');
+                        th.textContent = header;
+                        headerRow.appendChild(th);
+                    });
+
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        row.forEach(cell => {
+                            const td = document.createElement('td');
+                            td.textContent = cell;
+                            tr.appendChild(td);
+                        });
+                        bodyRow.appendChild(tr);
+                    });
+                }
+            });
+
+        function goBack() {
+            window.location.href = "secret.html";
+        }
+         function refreshPage() {
+            location.reload();
+        }      
+    </script>
+</body>
+</html>

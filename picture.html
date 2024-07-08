@@ -121,8 +121,11 @@
         </footer>
     </div>
    <script>
-        var CLIENT_ID = 'YOUR_CLIENT_ID';
-        var API_KEY = 'YOUR_API_KEY';
+fetch('config.json')
+            .then(response => response.json())
+            .then(config => {
+                gapi.load('client', start);
+
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
         var SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
 

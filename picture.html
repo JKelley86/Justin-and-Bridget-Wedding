@@ -22,67 +22,22 @@
         li {
             margin: 0 10px;
         }
-        }
         main {
             flex: 1;
             padding: 40px;
-            /* Removed background property */
         }
         footer {
             text-align: center;
             padding: 10px;
-            color: White; /* Adjust text color */
+            color: white;
             width: 100%;
-            margin-top: auto; /* Push footer to the bottom of the container */
-            position: relative; /* Ensure footer is relative to the container */
+            margin-top: auto;
+            position: relative;
         }
         h1, h2 {
             text-align: center;
         }
-        iframe {
-            width: 100%; /* Ensure the iframe fills its container */
-            height: 550px; /* Ensure the iframe fills its container */
-            border: none; /* Remove default border */
-            display: block;
-            margin: 0 auto;
-        }
-        .button-container {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .button {
-            background-color: #4CAF50; /* Green background */
-            color: white; /* White text */
-            padding: 10px 20px; /* Padding */
-            text-align: center; /* Centered text */
-            text-decoration: none; /* Remove underline */
-            display: inline-block; /* Make the link block-level */
-            font-size: 16px; /* Increase font size */
-            border: none; /* Remove border */
-            cursor: pointer; /* Pointer/hand icon on hover */
-            border-radius: 5px; /* Rounded corners */
-        }
-        .button:hover {
-            background-color: #45a049; /* Darker green background on hover */
-        }
-        table {
-            width: 50%; /* Set table width */
-            border-collapse: collapse;
-            margin: 20px auto; /* Center table horizontally */
-            color: rgb(255, 255, 255)
-        }
-        th, td {
-            border: 1px solid white;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: transparent;
-        }
-        .additional-info {
-            display: none;
-        }
-            .photo-gallery {
+        .photo-gallery {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -111,87 +66,89 @@
             <h1>Wedding Photos</h1>
             <p>Photo Form</p>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiPFt4XllqADn8F4ejHFiwhr8bZY2J_a2IxbWLw9Koodp4NA/viewform?usp=sf_link" target="_blank">Picture Upload Form</a>
-            <h1>Wedding Photos</h1>
-    <button id="authorize_button" style="display: none;">Authorize</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
-    <div class="photo-gallery" id="photo-gallery"></div>
+            <div class="photo-gallery" id="photo-gallery"></div>
         </main>
-         <footer>
+
+        <footer>
             <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
         </footer>
     </div>
-   <script>
-     fetch('config.json')
+
+    <script>
+        fetch('config.json')
             .then(response => response.json())
             .then(config => {
                 gapi.load('client', start);
 
-        var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
-        var SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
+                var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+                var SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
 
-        var authorizeButton = document.getElementById('authorize_button');
-        var signoutButton = document.getElementById('signout_button');
-        var photoGallery = document.getElementById('photo-gallery');
+                var authorizeButton = document.getElementById('authorize_button');
+                var signoutButton = document.getElementById('signout_button');
+                var photoGallery = document.getElementById('photo-gallery');
 
-        function handleClientLoad() {
-            gapi.load('client:auth2', initClient);
-        }
+                function handleClientLoad() {
+                    gapi.load('client:auth2', initClient);
+                }
 
-        function initClient() {
-            gapi.client.init({
-                apiKey: config.googleDriveApiKey,
-                clientId: config.googleDriveClientId,
-                discoveryDocs: DISCOVERY_DOCS,
-                scope: SCOPES
-            }).then(function () {
-                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-                authorizeButton.onclick = handleAuthClick;
-                signoutButton.onclick = handleSignoutClick;
-            }, function(error) {
-                console.error(JSON.stringify(error, null, 2));
+                function initClient() {
+                    gapi.client.init({
+                        apiKey: config.googleDriveApiKey,
+                        clientId: config.googleDriveClientId,
+                        discoveryDocs: DISCOVERY_DOCS,
+                        scope: SCOPES
+                    }).then(function () {
+                        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+                        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                        authorizeButton.onclick = handleAuthClick;
+                        signoutButton.onclick = handleSignoutClick;
+                    }, function(error) {
+                        console.error(JSON.stringify(error, null, 2));
+                    });
+                }
+
+                function updateSigninStatus(isSignedIn) {
+                    if (isSignedIn) {
+                        authorizeButton.style.display = 'none';
+                        signoutButton.style.display = 'block';
+                        listFiles();
+                    } else {
+                        authorizeButton.style.display = 'block';
+                        signoutButton.style.display = 'none';
+                    }
+                }
+
+                function handleAuthClick(event) {
+                    gapi.auth2.getAuthInstance().signIn();
+                }
+
+                function handleSignoutClick(event) {
+                    gapi.auth2.getAuthInstance().signOut();
+                }
+
+                function listFiles() {
+                    gapi.client.drive.files.list({
+                        'pageSize': 20,
+                        'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
+                        'q': "'1vs07Fupqg59XX4fGd96flr6OtVvUw4ud' in parents and mimeType contains 'image/'"
+                    }).then(function(response) {
+                        var files = response.result.files;
+                        if (files && files.length > 0) {
+                            files.forEach(file => {
+                                var img = document.createElement('img');
+                                img.src = file.thumbnailLink;
+                                photoGallery.appendChild(img);
+                            });
+                        } else {
+                            photoGallery.innerHTML = 'No photos found.';
+                        }
+                    }).catch(function(error) {
+                        console.error('Error listing files:', error);
+                    });
+                }
+
+                document.addEventListener('DOMContentLoaded', handleClientLoad);
             });
-        }
-
-        function updateSigninStatus(isSignedIn) {
-            if (isSignedIn) {
-                authorizeButton.style.display = 'none';
-                signoutButton.style.display = 'block';
-                listFiles();
-            } else {
-                authorizeButton.style.display = 'block';
-                signoutButton.style.display = 'none';
-            }
-        }
-
-        function handleAuthClick(event) {
-            gapi.auth2.getAuthInstance().signIn();
-        }
-
-        function handleSignoutClick(event) {
-            gapi.auth2.getAuthInstance().signOut();
-        }
-
-    function listFiles() {
-        gapi.client.drive.files.list({
-            'pageSize': 20,
-            'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
-            'q': "'1vs07Fupqg59XX4fGd96flr6OtVvUw4ud' in parents and mimeType contains 'image/'"
-        }).then(function(response) {
-            var files = response.result.files;
-            if (files && files.length > 0) {
-                files.forEach(file => {
-                    var img = document.createElement('img');
-                    img.src = file.thumbnailLink;
-                    photoGallery.appendChild(img);
-                });
-            } else {
-                photoGallery.innerHTML = 'No photos found.';
-            }
-        }).catch(function(error) {
-            console.error('Error listing files:', error);
-        });
-            document.addEventListener('DOMContentLoaded', handleClientLoad);
     </script>
-  </body>
+</body>
 </html>

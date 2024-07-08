@@ -176,7 +176,7 @@ fetch('config.json')
             gapi.client.drive.files.list({
                 'pageSize': 20,
                 'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
-                'q': "'1vs07Fupqg59XX4fGd96flr6OtVvUw4ud' in parents and mimeType contains 'image/'"
+                'q': "'1vs07Fupqg59XX4fGd96flr6OtVvUw4ud?usp=sharing' in parents and mimeType contains 'image/'"
             }).then(function(response) {
                 var files = response.result.files;
                 if (files && files.length > 0) {
@@ -189,8 +189,6 @@ fetch('config.json')
                     photoGallery.innerHTML = 'No photos found.';
                 }
             });
-        }
-
         document.addEventListener('DOMContentLoaded', handleClientLoad);
     </script>
 </body>

@@ -5,7 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Wedding Photos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/spotify-web-api-js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <style>
+        body {
+            background-image: url('picture5.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto; /* Center table horizontally */
+            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 30px; /* Add spacing below the button */
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: transparent;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+    </style>
 </head>
+<body>
+    <div class="container">
+        <nav>
+            <ul class="navbar-left">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="location.html">Info</a></li>
+                <li><a href="rsvp.html">RSVP</a></li>
+                <li><a href="secret.html">Main</a></li>
+                <li><a href=public.html">Photos</a></li>
+            </ul>
+            <div class="navbar-right">Justin & Bridget's Wedding</div>
+        </nav>
 <body>
     <h1>Upload Your Wedding Photos</h1>
     <form id="upload-form" enctype="multipart/form-data">

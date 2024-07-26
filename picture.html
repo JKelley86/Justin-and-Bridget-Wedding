@@ -113,6 +113,7 @@
                         'q': "'1vs07Fupqg59XX4fGd96flr6OtVvUw4ud' in parents and mimeType contains 'image/'"
                     }).then(function(response) {
                         var files = response.result.files;
+                        console.log('Files:', files); // Log the files to check if they are being fetched correctly
                         if (files && files.length > 0) {
                             files.forEach(file => {
                                 var img = document.createElement('img');

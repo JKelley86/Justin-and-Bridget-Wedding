@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Form</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         body {
             background-image: url('picture7.jpg');
@@ -73,79 +73,57 @@
         fetch('config.json')
             .then(response => response.json())
             .then(config => {
-                gapi.load('client', start);
+                const CLIENT_ID = config.googleDriveClientId;
+                const API_KEY = config.googleDriveApiKey;
+                const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+                const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
 
-                var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
-                var SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
-
-                var authorizeButton = document.getElementById('authorize_button');
-                var signoutButton = document.getElementById('signout_button');
-                var photoGallery = document.getElementById('photo-gallery');
+                let tokenClient;
+                let accessToken;
 
                 function start() {
-                    gapi.load('client:auth2', initClient);
-                }
-
-                function initClient() {
-                    gapi.client.init({
-                        apiKey: config.googleDriveApiKey,
-                        clientId: config.googleDriveClientId,
-                        discoveryDocs: DISCOVERY_DOCS,
-                        scope: SCOPES
-                    }).then(function () {
-                        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-                        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-                        authorizeButton.onclick = handleAuthClick;
-                        signoutButton.onclick = handleSignoutClick;
-                    }, function(error) {
-                        console.error(JSON.stringify(error, null, 2));
+                    tokenClient = google.accounts.oauth2.initTokenClient({
+                        client_id: CLIENT_ID,
+                        scope: SCOPES,
+                        callback: (tokenResponse) => {
+                            accessToken = tokenResponse.access_token;
+                            listFiles();
+                        }
                     });
-                }
-
-                function updateSigninStatus(isSignedIn) {
-                    if (isSignedIn) {
-                        authorizeButton.style.display = 'none';
-                        signoutButton.style.display = 'block';
-                        listFiles();
-                    } else {
-                        authorizeButton.style.display = 'block';
-                        signoutButton.style.display = 'none';
-                    }
-                }
-
-                function handleAuthClick(event) {
-                    gapi.auth2.getAuthInstance().signIn();
-                }
-
-                function handleSignoutClick(event) {
-                    gapi.auth2.getAuthInstance().signOut();
                 }
 
                 function listFiles() {
-                    gapi.client.drive.files.list({
-                        'pageSize': 20,
-                        'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
-                        'q': "'1oivfXhrbZM9x4wKPr4tWqrQeV_Yj7OKmhAUkVAnybSp2S91epit7XcNwb5KGTRjMs-9-lWvQ' in parents and mimeType contains 'image/'"
-                    }).then(function(response) {
-                        var files = response.result.files;
-                        console.log('Files:', files); // Log the files to check if they are being fetched correctly
-                        if (files && files.length > 0) {
-                            files.forEach(file => {
-                                var img = document.createElement('img');
-                                img.src = file.thumbnailLink;
-                                photoGallery.appendChild(img);
-                            });
-                        } else {
-                            photoGallery.innerHTML = 'No photos found.';
-                        }
-                    }).catch(function(error) {
-                        console.error('Error listing files:', error);
+                    gapi.client.setApiKey(API_KEY);
+                    gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest').then(() => {
+                        gapi.client.drive.files.list({
+                            'pageSize': 20,
+                            'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
+                            'q': "'1oivfXhrbZM9x4wKPr4tWqrQeV_Yj7OKmhAUkVAnybSp2S91epit7XcNwb5KGTRjMs-9-lWvQ' in parents and mimeType contains 'image/'"
+                        }).then(function(response) {
+                            const files = response.result.files;
+                            console.log('Files:', files); // Log the files to check if they are being fetched correctly
+                            if (files && files.length > 0) {
+                                files.forEach(file => {
+                                    const img = document.createElement('img');
+                                    img.src = file.thumbnailLink;
+                                    document.getElementById('photo-gallery').appendChild(img);
+                                });
+                            } else {
+                                document.getElementById('photo-gallery').innerHTML = 'No photos found.';
+                            }
+                        }).catch(function(error) {
+                            console.error('Error listing files:', error);
+                        });
                     });
                 }
 
-                document.addEventListener('DOMContentLoaded', handleClientLoad);
+                document.addEventListener('DOMContentLoaded', () => {
+                    start();
+                    tokenClient.requestAccessToken();
+                });
+
                 document.getElementById("secret-button").onclick = function() {
-                    var password = prompt("Please enter the password to view this page:");
+                    const password = prompt("Please enter the password to view this page:");
                     if (password === "6552") { // Replace with your actual password
                         window.location.href = "secret.html"; // Redirect to the secret page
                     } else {

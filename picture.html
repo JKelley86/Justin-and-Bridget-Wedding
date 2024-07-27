@@ -81,18 +81,22 @@
 
                 let tokenClient;
                 let accessToken;
+                const FOLDER_ID = '1vs07Fupqg59XX4fGd96flr6OtVvUw4ud'; // Replace with your actual folder ID
 
                 function handleClientLoad() {
+                    console.log('Loading GAPI client');
                     gapi.load('client:auth2', initClient);
                 }
 
                 function initClient() {
+                    console.log('Initializing GAPI client');
                     gapi.client.init({
                         apiKey: API_KEY,
                         clientId: CLIENT_ID,
                         discoveryDocs: DISCOVERY_DOCS,
                         scope: SCOPES
                     }).then(() => {
+                        console.log('GAPI client initialized');
                         tokenClient = google.accounts.oauth2.initTokenClient({
                             client_id: CLIENT_ID,
                             scope: SCOPES,
@@ -102,15 +106,19 @@
                                 listFiles();
                             }
                         });
+                        console.log('Requesting access token');
                         tokenClient.requestAccessToken();
+                    }).catch(error => {
+                        console.error('Error initializing GAPI client:', error);
                     });
                 }
 
                 function listFiles() {
+                    console.log('Listing files');
                     gapi.client.drive.files.list({
                         'pageSize': 20,
                         'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
-                        'q': "'1vs07Fupqg59XX4fGd96flr6OtVvUw4ud' in parents and mimeType contains 'image/'"
+                        'q': `'${FOLDER_ID}' in parents and mimeType contains 'image/'`
                     }).then(response => {
                         console.log('API response:', response);
                         const files = response.result.files;
@@ -131,7 +139,9 @@
                             console.log('No photos found');
                             document.getElementById('photo-gallery').innerHTML = 'No photos found.';
                         }
-                    }).catch(error => console.error('Error listing files:', error));
+                    }).catch(error => {
+                        console.error('Error listing files:', error);
+                    });
                 }
 
                 document.addEventListener('DOMContentLoaded', () => {

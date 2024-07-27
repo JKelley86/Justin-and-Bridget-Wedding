@@ -73,7 +73,7 @@
         fetch('config.json')
             .then(response => response.json())
             .then(config => {
-                console.log('Config loaded:', config); // Log the loaded config
+                console.log('Config loaded:', config);
                 const CLIENT_ID = config.googleDriveClientId;
                 const API_KEY = config.googleDriveApiKey;
                 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
@@ -83,12 +83,12 @@
                 let accessToken;
 
                 function start() {
-                    console.log('Initializing token client'); // Log token client initialization
+                    console.log('Initializing token client');
                     tokenClient = google.accounts.oauth2.initTokenClient({
                         client_id: CLIENT_ID,
                         scope: SCOPES,
                         callback: (tokenResponse) => {
-                            console.log('Token response:', tokenResponse); // Log the token response
+                            console.log('Token response:', tokenResponse);
                             accessToken = tokenResponse.access_token;
                             listFiles();
                         }
@@ -96,7 +96,7 @@
                 }
 
                 function listFiles() {
-                    console.log('Listing files'); // Log file listing start
+                    console.log('Listing files');
                     gapi.client.setApiKey(API_KEY);
                     gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest').then(() => {
                         gapi.client.drive.files.list({
@@ -104,13 +104,13 @@
                             'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
                             'q': "'1oivfXhrbZM9x4wKPr4tWqrQeV_Yj7OKmhAUkVAnybSp2S91epit7XcNwb5KGTRjMs-9-lWvQ' in parents and mimeType contains 'image/'"
                         }).then(function(response) {
-                            console.log('API response:', response); // Log the entire API response
+                            console.log('API response:', response);
                             const files = response.result.files;
-                            console.log('Files:', files); // Log the files to check if they are being fetched correctly
+                            console.log('Files:', files);
                             if (files && files.length > 0) {
                                 files.forEach(file => {
-                                    console.log('File:', file); // Log each file's details
-                                    console.log('Thumbnail Link:', file.thumbnailLink); // Log the thumbnail link
+                                    console.log('File:', file);
+                                    console.log('Thumbnail Link:', file.thumbnailLink);
                                     if (file.thumbnailLink) {
                                         const img = document.createElement('img');
                                         img.src = file.thumbnailLink;
@@ -120,7 +120,7 @@
                                     }
                                 });
                             } else {
-                                console.log('No photos found'); // Log if no photos are found
+                                console.log('No photos found');
                                 document.getElementById('photo-gallery').innerHTML = 'No photos found.';
                             }
                         }).catch(function(error) {
@@ -130,7 +130,7 @@
                 }
 
                 document.addEventListener('DOMContentLoaded', () => {
-                    console.log('Document loaded, starting token client'); // Log document load
+                    console.log('Document loaded, starting token client');
                     start();
                     tokenClient.requestAccessToken();
                 });

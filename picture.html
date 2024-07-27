@@ -100,13 +100,20 @@
                             'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
                             'q': "'1oivfXhrbZM9x4wKPr4tWqrQeV_Yj7OKmhAUkVAnybSp2S91epit7XcNwb5KGTRjMs-9-lWvQ' in parents and mimeType contains 'image/'"
                         }).then(function(response) {
+                            console.log('API response:', response); // Log the entire API response
                             const files = response.result.files;
                             console.log('Files:', files); // Log the files to check if they are being fetched correctly
                             if (files && files.length > 0) {
                                 files.forEach(file => {
-                                    const img = document.createElement('img');
-                                    img.src = file.thumbnailLink;
-                                    document.getElementById('photo-gallery').appendChild(img);
+                                    console.log('File:', file); // Log each file's details
+                                    console.log('Thumbnail Link:', file.thumbnailLink); // Log the thumbnail link
+                                    if (file.thumbnailLink) {
+                                        const img = document.createElement('img');
+                                        img.src = file.thumbnailLink;
+                                        document.getElementById('photo-gallery').appendChild(img);
+                                    } else {
+                                        console.log('No thumbnail link for file:', file.name);
+                                    }
                                 });
                             } else {
                                 document.getElementById('photo-gallery').innerHTML = 'No photos found.';

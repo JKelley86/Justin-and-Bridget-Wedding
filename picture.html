@@ -73,6 +73,7 @@
         fetch('config.json')
             .then(response => response.json())
             .then(config => {
+                console.log('Config loaded:', config); // Log the loaded config
                 const CLIENT_ID = config.googleDriveClientId;
                 const API_KEY = config.googleDriveApiKey;
                 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
@@ -82,10 +83,12 @@
                 let accessToken;
 
                 function start() {
+                    console.log('Initializing token client'); // Log token client initialization
                     tokenClient = google.accounts.oauth2.initTokenClient({
                         client_id: CLIENT_ID,
                         scope: SCOPES,
                         callback: (tokenResponse) => {
+                            console.log('Token response:', tokenResponse); // Log the token response
                             accessToken = tokenResponse.access_token;
                             listFiles();
                         }
@@ -93,6 +96,7 @@
                 }
 
                 function listFiles() {
+                    console.log('Listing files'); // Log file listing start
                     gapi.client.setApiKey(API_KEY);
                     gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest').then(() => {
                         gapi.client.drive.files.list({
@@ -116,6 +120,7 @@
                                     }
                                 });
                             } else {
+                                console.log('No photos found'); // Log if no photos are found
                                 document.getElementById('photo-gallery').innerHTML = 'No photos found.';
                             }
                         }).catch(function(error) {
@@ -125,6 +130,7 @@
                 }
 
                 document.addEventListener('DOMContentLoaded', () => {
+                    console.log('Document loaded, starting token client'); // Log document load
                     start();
                     tokenClient.requestAccessToken();
                 });

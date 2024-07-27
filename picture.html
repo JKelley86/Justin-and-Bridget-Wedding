@@ -69,85 +69,82 @@
         </footer>
     </div>
 
-<script>
-    fetch('config.json')
-        .then(response => response.json())
-        .then(config => {
-            console.log('Config loaded:', config);
-            const CLIENT_ID = config.googleDriveClientId;
-            const API_KEY = config.googleDriveApiKey;
-            const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
-            const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
+    <script>
+        fetch('config.json')
+            .then(response => response.json())
+            .then(config => {
+                console.log('Config loaded:', config);
+                const CLIENT_ID = config.googleDriveClientId;
+                const API_KEY = config.googleDriveApiKey;
+                const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+                const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
 
-            let tokenClient;
-            let accessToken;
+                let tokenClient;
+                let accessToken;
 
-            function start() {
-                console.log('Initializing token client');
-                tokenClient = google.accounts.oauth2.initTokenClient({
-                    client_id: CLIENT_ID,
-                    scope: SCOPES,
-                    callback: (tokenResponse) => {
-                        console.log('Token response:', tokenResponse);
-                        accessToken = tokenResponse.access_token;
-                        listFiles();
-                    }
-                });
-            }
-
-            function listFiles() {
-                console.log('Listing files');
-                gapi.client.setApiKey(API_KEY);
-                gapi.client.load(DISCOVERY_DOCS[0]).then(() => {
-                    gapi.client.drive.files.list({
-                        'pageSize': 20,
-                        'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
-                        'q': "'1oivfXhrbZM9x4wKPr4tWqrQeV_Yj7OKmhAUkVAnybSp2S91epit7XcNwb5KGTRjMs-9-lWvQ' in parents and mimeType contains 'image/'"
-                    }).then(function(response) {
-                        console.log('API response:', response);
-                        const files = response.result.files;
-                        console.log('Files:', files);
-                        if (files && files.length > 0) {
-                            files.forEach(file => {
-                                console.log('File:', file);
-                                const img = document.createElement('img');
-                                img.alt = file.name;
-                                if (file.thumbnailLink) {
-                                    img.src = file.thumbnailLink;
-                                } else if (file.webViewLink) {
-                                    img.src = `https://drive.google.com/uc?export=view&id=${file.id}`;
-                                } else {
-                                    console.log('No thumbnail or web view link for file:', file.name);
-                                    img.src = 'default-placeholder.png'; // Use a placeholder if no image link is available
-                                }
-                                document.getElementById('photo-gallery').appendChild(img);
-                            });
-                        } else {
-                            console.log('No photos found');
-                            document.getElementById('photo-gallery').innerHTML = 'No photos found.';
+                function start() {
+                    console.log('Initializing token client');
+                    tokenClient = google.accounts.oauth2.initTokenClient({
+                        client_id: CLIENT_ID,
+                        scope: SCOPES,
+                        callback: (tokenResponse) => {
+                            console.log('Token response:', tokenResponse);
+                            accessToken = tokenResponse.access_token;
+                            listFiles();
                         }
-                    }).catch(function(error) {
-                        console.error('Error listing files:', error);
                     });
-                }).catch(error => console.error('Error loading API:', error));
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                console.log('Document loaded, starting token client');
-                start();
-                tokenClient.requestAccessToken();
-            });
-
-            document.getElementById("secret-button").onclick = function() {
-                const password = prompt("Please enter the password to view this page:");
-                if (password === "6552") { // Replace with your actual password
-                    window.location.href = "secret.html"; // Redirect to the secret page
-                } else {
-                    alert("Incorrect password.");
                 }
-            };
-        })
-        .catch(error => console.error('Error fetching config.json:', error));
-</script>
+
+                function listFiles() {
+                    console.log('Listing files');
+                    gapi.client.setApiKey(API_KEY);
+                    gapi.client.load(DISCOVERY_DOCS[0]).then(() => {
+                        gapi.client.drive.files.list({
+                            'pageSize': 20,
+                            'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
+                            'q': "'1oivfXhrbZM9x4wKPr4tWqrQeV_Yj7OKmhAUkVAnybSp2S91epit7XcNwb5KGTRjMs-9-lWvQ' in parents and mimeType contains 'image/'"
+                        }).then(function(response) {
+                            console.log('API response:', response);
+                            const files = response.result.files;
+                            console.log('Files:', files);
+                            if (files && files.length > 0) {
+                                files.forEach(file => {
+                                    console.log('File:', file);
+                                    const img = document.createElement('img');
+                                    img.alt = file.name;
+                                    if (file.thumbnailLink) {
+                                        img.src = file.thumbnailLink;
+                                    } else {
+                                        img.src = `https://drive.google.com/uc?export=view&id=${file.id}`;
+                                    }
+                                    document.getElementById('photo-gallery').appendChild(img);
+                                });
+                            } else {
+                                console.log('No photos found');
+                                document.getElementById('photo-gallery').innerHTML = 'No photos found.';
+                            }
+                        }).catch(function(error) {
+                            console.error('Error listing files:', error);
+                        });
+                    }).catch(error => console.error('Error loading API:', error));
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    console.log('Document loaded, starting token client');
+                    start();
+                    tokenClient.requestAccessToken();
+                });
+
+                document.getElementById("secret-button").onclick = function() {
+                    const password = prompt("Please enter the password to view this page:");
+                    if (password === "6552") { // Replace with your actual password
+                        window.location.href = "secret.html"; // Redirect to the secret page
+                    } else {
+                        alert("Incorrect password.");
+                    }
+                };
+            })
+            .catch(error => console.error('Error fetching config.json:', error));
+    </script>
 </body>
 </html>

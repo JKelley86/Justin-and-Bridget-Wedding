@@ -110,7 +110,7 @@
 
                     gapi.client.sheets.spreadsheets.values.get({
                         spreadsheetId: config.googleSheetsID,
-                        range: 'Main!F3:G8',
+                        range: 'Main!F3:G12',
                     }).then(function(response) {
                         const data = response.result.values;
                         console.log('Walk Down Order Data:', data);

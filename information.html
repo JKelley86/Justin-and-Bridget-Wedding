@@ -72,6 +72,14 @@
             </thead>
             <tbody id="table-body-3"></tbody>
         </table>
+
+        <h3>Song Details</h3>
+        <table id="data-table-4">
+            <thead>
+                <tr id="table-header-4"></tr>
+            </thead>
+            <tbody id="table-body=4"></tbody>
+        </table>
         <footer>
             <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
         </footer>
@@ -126,6 +134,17 @@
                         const data = response.result.values;
                         console.log('Schedule Data:', data);
                         populateTable(data, 'table-header-3', 'table-body-3');
+                    }).catch(function(error) {
+                        console.error('Error fetching Schedule sheet:', error.result.error.message);
+                    });
+                    
+                    gapi.client.sheets.spreadsheets.values.get({
+                        spreadsheetId: config.googleSheetsID,
+                        range: 'Main!M3:N14',
+                    }).then(function(response) {
+                        const data = response.result.values;
+                        console.log('Schedule Data:', data);
+                        populateTable(data, 'table-header-4', 'table-body-4');
                     }).catch(function(error) {
                         console.error('Error fetching Schedule sheet:', error.result.error.message);
                     });

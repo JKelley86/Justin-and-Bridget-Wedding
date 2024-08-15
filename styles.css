@@ -36,6 +36,12 @@ body {
     height: 100vh;
 }
 
+/* Countdown Timer */
+#countdown {
+    font-size: 28px;
+    color: #FAF3E0; /* Light beige */
+    margin: 20px 0;
+}
 nav {
     position: fixed;
     top: 0;
@@ -76,6 +82,7 @@ nav ul li a {
 nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background on hover */
     border-color: white; /* White border color on hover */
+    transform: scale(1.1); /* Enlarges on hover */
 }
 
 .navbar-right {

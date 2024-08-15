@@ -45,14 +45,17 @@
         <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
     </footer> 
  </div>
- <script>
-    document.getElementById("secret-button").onclick = function() {
-        var password = prompt("Please enter the password to view this page:");
-        if (password === "6552") { // Replace with your actual password
-            window.location.href = "secret.html"; // Redirect to the secret page
-        } else {
-            alert("Incorrect password.");
-        }
+    <script>
+        // Password-protected section script
+        document.getElementById("secret-button").onclick = function() {
+            var password = prompt("Please enter the password to view this page:");
+            if (password === "6552") { // Replace with your actual password
+                window.location.href = "secret.html"; // Redirect to the secret page
+            } else {
+                alert("Incorrect password.");
+            }
+        };
+
         // Countdown Timer Script
         var countDownDate = new Date("Sep 13, 2025 00:00:00").getTime();
         var countdownfunction = setInterval(function() {
@@ -71,7 +74,21 @@
                 document.getElementById("countdown").innerHTML = "EXPIRED";
             }
         }, 1000);
-    };
- </script>
+
+        // Slideshow Script
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var slides = document.getElementsByClassName("slide");
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
+    </script>
 </body>
 </html>

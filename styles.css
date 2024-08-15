@@ -42,6 +42,15 @@ body {
     color: #FAF3E0; /* Light beige */
     margin: 20px 0;
 }
+.logo-container {
+    text-align: center; /* Centers the logo horizontally */
+    margin-top: 20px;   /* Adds some space above the logo */
+}
+
+.logo-image {
+    width: 150px;      /* Adjust the width as needed */
+    height: auto;      /* Maintains the aspect ratio */
+}
 nav {
     position: fixed;
     top: 0;

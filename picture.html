@@ -113,40 +113,40 @@
                     });
                 }
 
-                function listFiles() {
-                    console.log('Listing files');
-                    try {
-                        gapi.client.drive.files.list({
-                            'pageSize': 20,
-                            'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
-                            'q': `'${FOLDER_ID}' in parents and mimeType contains 'image/'`
-                        }).then(response => {
-                            console.log('API response:', response);
-                            const files = response.result.files;
-                            console.log('Files:', files);
-                            if (files && files.length > 0) {
-                                files.forEach(file => {
-                                    console.log('File:', file);
-                                    const img = document.createElement('img');
-                                    img.alt = file.name;
-                                    if (file.thumbnailLink) {
-                                        img.src = file.thumbnailLink;
-                                    } else {
-                                        img.src = `https://drive.google.com/uc?export=view&id=${file.id}`;
-                                    }
-                                    document.getElementById('photo-gallery').appendChild(img);
-                                });
-                            } else {
-                                console.log('No photos found');
-                                document.getElementById('photo-gallery').innerHTML = 'No photos found.';
-                            }
-                        }).catch(error => {
-                            console.error('Error listing files:', error);
-                        });
-                    } catch (error) {
-                        console.error('Error in listFiles function:', error);
+function listFiles() {
+    console.log('Listing files');
+    try {
+        gapi.client.drive.files.list({
+            'pageSize': 20,
+            'fields': "nextPageToken, files(id, name, mimeType, webViewLink, thumbnailLink)",
+            'q': `'${FOLDER_ID}' in parents and mimeType contains 'image/'`
+        }).then(response => {
+            console.log('API response:', response);
+            const files = response.result.files;
+            console.log('Files:', files);
+            if (files && files.length > 0) {
+                files.forEach(file => {
+                    console.log('File:', file);
+                    const img = document.createElement('img');
+                    img.alt = file.name;
+                    if (file.thumbnailLink) {
+                        img.src = file.thumbnailLink;
+                    } else {
+                        img.src = `https://drive.google.com/uc?export=view&id=${file.id}`;
                     }
-                }
+                    document.getElementById('photo-gallery').appendChild(img);
+                });
+            } else {
+                console.log('No photos found');
+                document.getElementById('photo-gallery').innerHTML = 'No photos found.';
+            }
+        }).catch(error => {
+            console.error('Error listing files:', error);
+        });
+    } catch (error) {
+        console.error('Error in listFiles function:', error);
+    }
+}
 
                 document.addEventListener('DOMContentLoaded', () => {
                     console.log('Document loaded, starting client');

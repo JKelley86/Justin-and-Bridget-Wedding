@@ -13,7 +13,7 @@ html, body {
 }
 <style>
         @font-face {
-            font-family: 'Fairwater Script';
+            font-family: 'Pompiere';
             src: url('FairwaterScript.woff2') format('woff2'), /* Update this to the correct file format and path */
                  url('FairwaterScript.woff') format('woff');
             font-weight: normal;
@@ -110,7 +110,7 @@ main {
 h1, h2 {
     color: white; /* Override text color for headers */
      text-align: center;
-font-family: 'Fairwater Script', 'Comic Sans MS', Cursive;
+font-family: 'Pompiere', 'Comic Sans MS', Cursive;
 }
 .main-list {
     list-style-type: none; /* Remove default list styles for main list */

@@ -8,14 +8,12 @@ html, body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    color: #CABEA6;
+    color: black;
     overflow: hidden;
 }
 <style>
         @font-face {
             font-family: 'Pompiere';
-            src: url('FairwaterScript.woff2') format('woff2'), /* Update this to the correct file format and path */
-                 url('FairwaterScript.woff') format('woff');
             font-weight: normal;
             font-style: normal;
         }

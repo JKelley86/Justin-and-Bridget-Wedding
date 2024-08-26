@@ -178,6 +178,17 @@
             height: 60px;
             margin: 0 20px;
         }
+	    #gear-icon-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    #gear-icon {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
     </style>
 </head>
 <body>
@@ -215,6 +226,9 @@
                 <div><h3>35455 Grand Ave, North Branch, MN, 55056</h3></div>
             </div>
 	   <h5>J&B</h5>
+	<div id="gear-icon-container">
+    <img src="path/to/gear-icon.png" alt="Settings" id="gear-icon">
+</div>
         </main>
 
         <script>

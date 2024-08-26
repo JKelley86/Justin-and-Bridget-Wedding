@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Justin & Bridget's Wedding</title>
+    <!-- Load Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pompiere&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        html, body {
+            background-color: #CABEA6;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Pompiere', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 20px;
+        }
+	main {
+ 	   padding-bottom: 70px; /* Adjust this value as needed */
+	}
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 40px;
+            margin-top: 40;
+        }
+        h2 {
+            text-align: center;
+            color: white;
+            font-size: 25px;
+            margin-top: 10px;
+        }
+        h3, h4 {
+            text-align: center;
+            color: black;
+            font-size: 25px;
+        }
+        p {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .sub-text {
+            color: black;
+            font-size: 16px;
+            text-align: center;
+        }
+        h5 {
+            text-align: center;
+            color: black;
+            font-size: 100px;
+            margin-top: 20px;
+	    margin-bottom: 40px;
+        }
+        #countdown-container {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            display: center;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: transparent;
+        }
+        .logo-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .logo-image {
+            max-width: 15%;
+            height: auto;
+        }
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .hamburger-menu {
+            width: 30px;
+            height: 30px;
+            background-color:  #CABEA6;
+            position: relative;
+            cursor: pointer;
+        }
+        .hamburger-menu div {
+            width: 100%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            background-color: #709B67;
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            border-radius: 4px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 150px;
+        }
+        .menu a {
+            padding: 10px;
+            color: black;
+            text-decoration: none;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .menu a:last-child {
+            border-bottom: none;
+        }
+        .menu a:hover {
+            background-color: #e0e0e0;
+        }
+        .hamburger-menu.active div:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .hamburger-menu.active div:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.active div:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        .hamburger-menu.active + .menu {
+            display: flex;
+        }
+        .full-width-image {
+            width: 100%;
+            height: auto;
+        }
+        .details-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            padding: 20px;
+            background-color: #CABEA6;
+            color: black;
+            font-size: 18px;
+  	    margin: 0 auto; /* Center the section horizontally */
+        }
+        .details-section div {
+            text-align: center;
+        }
+        .details-section .vertical-line {
+            width: 2px;
+            background-color: black;
+            height: 60px;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="hamburger-menu" id="hamburger-menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="menu" id="menu">
+                <a href="index.html">Home</a>
+                <a href="ourstory.html">Our Story</a>
+                <a href="info.html">Info</a>
+                <a href="rsvp.html">RSVP</a>
+            </div>
+        </nav>
+        
+        <main>
+            <h1>OUR STORY</h1>
+            <div class="logo-container">
+                <img src="weddinglogo.jpeg" alt="Wedding Logo" class="logo-image">
+            </div>
+            <h2>JUSTIN & BRIDGET</h2>
+            <img src="story1.jpg" alt="Wedding Image" class="full-width-image">
+            <h3>BRIDGET'S STORY</h3>H3>
+	          <div class="sub-text">
+		          Born on December 19, 2001, Bridget's journey has been one of resilience, adventure, and determination. Her early years were spent at Cedar Creek Elementary School, where she first met Justin, and their childhood friendship laid the foundation for a beautiful story yet to unfold. As life took Bridget to Rockford Elementary School and then Stillwater Jr. High School, she embraced each new environment with a positive spirit and an eagerness to learn. Her middle school years at Maplewood were filled with growth and new experiences, and she eventually found herself at North St. Paul High School, where her passion for soccer truly shone. On the field, Bridget's dedication and skill were evident, and she became a vital part of her team's success. Following high school, Bridget's academic journey led her to Hannibal LaGrange University and later to Jamestown University, where she earned her bachelor's degree in Criminal Justice with a minor in Psychology. Balancing the demands of her studies with her commitment to playing soccer was no easy feat, but Bridget's determination and love for the game saw her through. Her academic achievements are a testament to her hard work, intelligence, and perseverance. Outside the classroom and off the field, Bridget's love for the outdoors is unmistakable. Whether she's hunting, fishing, or hiking, she finds peace and joy in nature's embrace. Her adventurous spirit takes her to the mountains and the beach, where she revels in the beauty and tranquility of these natural landscapes. These vacations are a cherished escape, offering the perfect backdrop for creating lasting memories. Among all her passions, one of Bridget's greatest loves is her dog, who brings her immense joy and companionship. The bond they share is a special part of her life, and her furry friend is a constant source of happiness. As Bridget prepares to walk down the aisle and start a new chapter with Justin, she brings with her a wealth of experiences, a heart full of love, and an unwavering spirit. Her journey has been shaped by the many places she's called home, the challenges she's overcome, and the passions that drive her. Together with Justin, Bridget looks forward to a future filled with adventure, love, and the promise of a lifetime of happiness.
+	          </div>
+            <img src="story2.jpg" alt="Wedding Image" class="full-width-image">
+            <h3>JUSTIN'S STORY</h3>H3>
+	          <div class="sub-text">
+		          Born on July 5, 2002, Justin has always embraced life with enthusiasm and a sense of adventure. Growing up in a close-knit community, he attended Cedar Creek Elementary School, where he first met Bridget in the third grade. Their early friendship, filled with playground games and shared laughter, was just the beginning of a lifelong connection. As Justin moved on to St. Francis Middle School and St. Francis High School, he developed a wide range of interests and friendships. It was during these formative years that his love for the great outdoors blossomed. Whether it was camping under the stars, casting a line into a tranquil lake, or enjoying the thrill of shooting sports, Justin found joy in nature's embrace. His adventurous spirit and love for exploration were evident to everyone who knew him. After high school, Justin pursued his passion for technology and engineering at Hennepin Technical College. With a keen mind and a natural talent for problem-solving, he excelled in his studies and embarked on a fulfilling career as a controls engineer. His dedication and hard work have earned him respect and admiration in his field, but it's his genuine love for his work that truly sets him apart. When he's not immersed in the world of engineering, Justin can be found indulging in his favorite pastimes. He loves spending time on the water, whether he's fishing in a quiet cove, cruising on a boat, or simply soaking in the serenity of a lakeside sunset. Vacations are another cherished escape for Justin, offering the perfect blend of relaxation and adventure. Justin's love for the outdoors is matched only by his passion for building lasting memories with those he loves. His sense of humor, warm heart, and adventurous spirit make him a cherished friend and partner. As he prepares to embark on this new chapter with Bridget, his soulmate and best friend, Justin looks forward to a future filled with love, laughter, and endless adventures together. 
+	          </div>
+            <img src="story3.jpg" alt="Wedding Image" class="full-width-image">
+	   <h5>J&B</h5>
+        </main>
+
+        <script>
+            // Hamburger menu toggle
+            document.getElementById("hamburger-menu").onclick = function() {
+                this.classList.toggle("active");
+                document.getElementById("menu").classList.toggle("active");
+            };
+
+            // Countdown Timer Script (Days Only)
+            var countDownDate = new Date("Sep 13, 2025 00:00:00").getTime();
+            var countdownfunction = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+                document.getElementById("countdown").innerHTML = days;
+
+                if (distance < 0) {
+                    clearInterval(countdownfunction);
+                    document.getElementById("countdown").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+        </script>
+    </div>
+</body>
+</html>

@@ -23,6 +23,8 @@ html, body {
     align-items: center;
     justify-content: flex-start;
     padding-top: 20px;
+    flex: 1; /* Allow container to grow and shrink */
+    height: 100vh;
 }
 
 h1, h2, h3, h4, p, h5 {

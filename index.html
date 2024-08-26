@@ -252,6 +252,14 @@
                     document.getElementById("countdown").innerHTML = "EXPIRED";
                 }
             }, 1000);
+    document.getElementById("gear-icon").onclick = function() {
+        var password = prompt("Please enter the password:");
+        if (password === "yourPassword") { // Replace 'yourPassword' with your actual password
+            window.location.href = "secrete.html";
+        } else if (password !== null) {
+            alert("Incorrect password. Please try again.");
+        }
+    };
         </script>
     </div>
 </body>

@@ -1,69 +1,294 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location - Justin & Bridget's Wedding</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Info - Justin & Bridget's Wedding</title>
+    <!-- Load Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pompiere&display=swap">
     <link rel="stylesheet" href="styles.css">
-</head>
-<body style="background-image: url('picture2.jpeg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-  <div class="container">
-    <nav>
-        <ul class="navbar-left">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="location.html">Info</a></li>
-            <li><a href="rsvp.html">RSVP</a></li>
-        </ul>
-        <div class="navbar-right">
-            <span class="navbar-text" id="secret-button" style="cursor: pointer;">Justin & Bridget's Wedding</span>
-        </div>
-    </nav>  
-
-    <main>
-            <h1>Location</h1>
-            <p>Address:
-            <a href="https://www.google.com/maps/place/35455+Grand+Ave,+North+Branch,+MN+55056/@45.4616696,-92.9677487,357m/data=!3m1!1e3!4m6!3m5!1s0x52b2f0ec674ba531:0xae430ad03fb20777!8m2!3d45.4621188!4d-92.9660126!16s%2Fg%2F11gdkxvmjy?entry=ttu" target="_blank">35455 Grand Ave, North Branch MN 55056</a>
-            </p>
-
-<section>
-    <h2>Places To Stay The Night</h2>
-    <ul class="main-list">
-        <li>1. Hotels:
-            <ul class="sub-list">
-                <li>AmericInn by Wyndham North Branch: 4.6 miles</li>
-                <li>Budget Host: 4.5 miles</li>
-            </ul>
-        </li>
-        <li>2. Tent Camping (BYOT)</li>
-    </ul>
-</section>
-
-        <section>
-            <h2>Additional Details</h2>
-            <ul>
-                <li>Start Time: 5:00pm</li>
-                <li>Menu: Taco Bar Buffet</li>
-            </ul>
-            <h2>Wedding Registry</h2>
-            <p>Please visit our Amazon list for gift ideas:
-            <a href="https://www.amazon.com/hz/wishlist/ls/268WR4235GF3N?ref_=wl_share" target="_blank">Our Amazon List</a>
-            </p>    
-        </section>
-    </main>
-
-    <footer> 
-        <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
-    </footer> 
-  </div>
- <script>
-    document.getElementById("secret-button").onclick = function() {
-        var password = prompt("Please enter the password to view this page:");
-        if (password === "6552") { // Replace with your actual password
-            window.location.href = "secret.html"; // Redirect to the secret page
-        } else {
-            alert("Incorrect password.");
+    <style>
+        html, body {
+            background-color: #CABEA6;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Pompiere', sans-serif;
+            overflow: hidden;
         }
-    };
- </script>
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 20px;
+        }
+	main {
+ 	   padding-bottom: 70px; /* Adjust this value as needed */
+	}
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 40px;
+            margin-top: 40;
+        }
+        h2 {
+            text-align: center;
+            color: white;
+            font-size: 25px;
+            margin-top: 10px;
+        }
+        h3, h4 {
+            text-align: center;
+            color: black;
+            font-size: 25px;
+        }
+        p {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .sub-text {
+            color: black;
+            font-size: 16px;
+            text-align: center;
+        }
+        h5 {
+            text-align: center;
+            color: black;
+            font-size: 100px;
+            margin-top: 20px;
+	    margin-bottom: 40px;
+        }
+        #countdown-container {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            display: center;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: transparent;
+        }
+        .logo-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .logo-image {
+            max-width: 15%;
+            height: auto;
+        }
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .hamburger-menu {
+            width: 30px;
+            height: 30px;
+            background-color:  #CABEA6;
+            position: relative;
+            cursor: pointer;
+        }
+        .hamburger-menu div {
+            width: 100%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            background-color: #709B67;
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            border-radius: 4px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 150px;
+        }
+        .menu a {
+            padding: 10px;
+            color: black;
+            text-decoration: none;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .menu a:last-child {
+            border-bottom: none;
+        }
+        .menu a:hover {
+            background-color: #e0e0e0;
+        }
+        .hamburger-menu.active div:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .hamburger-menu.active div:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.active div:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        .hamburger-menu.active + .menu {
+            display: flex;
+        }
+        .full-width-image {
+            width: 100%;
+            height: auto;
+        }
+        .details-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            padding: 20px;
+            background-color: #CABEA6;
+            color: black;
+            font-size: 18px;
+  	    margin: 0 auto; /* Center the section horizontally */
+        }
+        .details-section div {
+            text-align: center;
+        }
+        .details-section .vertical-line {
+            width: 2px;
+            background-color: black;
+            height: 60px;
+            margin: 0 20px;
+        }
+.wedding-party {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding: 0 10px;
+}
+
+.side {
+    flex: 1;
+    text-align: center;
+}
+
+.person {
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.vertical-line {
+    width: 2px;
+    background-color: black;
+    height: auto;
+    margin: 0 20px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="hamburger-menu" id="hamburger-menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="menu" id="menu">
+                <a href="index.html">Home</a>
+                <a href="ourstory.html">Our Story</a>
+                <a href="info.html">Info</a>
+		<a href="weddingparty.html">Wedding Party</a>
+                <a href="rsvp.html">RSVP</a>
+            </div>
+        </nav>
+
+        <main>
+            <h1>WEDDING PARTY</h1>
+            <div class="logo-container">
+                <img src="weddinglogo.jpeg" alt="Wedding Logo" class="logo-image">
+            </div>
+            <h2>JUSTIN & BRIDGET</h2>
+            <img src="info.jpg" alt="Wedding Image" class="full-width-image">
+	        <h3>Meet Our Wedding Party</h3>
+<div class="wedding-party">
+    <div class="side bridesmaids">
+        <h4>Bridesmaids</h4>
+        <div class="person">
+            <img src="bridesmaid1.jpg" alt="Bridesmaid 1" class="profile-pic">
+            <p>Bridesmaid 1</p>
+        </div>
+        <div class="person">
+            <img src="bridesmaid2.jpg" alt="Bridesmaid 2" class="profile-pic">
+            <p>Bridesmaid 2</p>
+        </div>
+        <!-- Add more bridesmaids as needed -->
+    </div>
+    <div class="vertical-line"></div>
+    <div class="side groomsmen">
+        <h4>Groomsmen</h4>
+        <div class="person">
+            <img src="groomsman1.jpg" alt="Groomsman 1" class="profile-pic">
+            <p>Groomsman 1</p>
+        </div>
+        <div class="person">
+            <img src="groomsman2.jpg" alt="Groomsman 2" class="profile-pic">
+            <p>Groomsman 2</p>
+        </div>
+        <!-- Add more groomsmen as needed -->
+    </div>
+</div>>
+	   <h5>J&B</h5>
+        </main>
+
+        <script>
+            // Hamburger menu toggle
+            document.getElementById("hamburger-menu").onclick = function() {
+                this.classList.toggle("active");
+                document.getElementById("menu").classList.toggle("active");
+            };
+
+            // Countdown Timer Script (Days Only)
+            var countDownDate = new Date("Sep 13, 2025 00:00:00").getTime();
+            var countdownfunction = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+                document.getElementById("countdown").innerHTML = days;
+
+                if (distance < 0) {
+                    clearInterval(countdownfunction);
+                    document.getElementById("countdown").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+        </script>
+    </div>
 </body>
 </html>

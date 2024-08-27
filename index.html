@@ -280,33 +280,7 @@
         </div>
 
         <script>
-            // Hamburger menu toggle
-            document.getElementById("hamburger-menu").onclick = function() {
-                this.classList.toggle("active");
-                document.getElementById("menu").classList.toggle("active");
-            };
-
-            // Countdown Timer Script (Days Only)
-            var countDownDate = new Date("Sep 13, 2025 00:00:00").getTime();
-            var countdownfunction = setInterval(function() {
-                var now = new Date().getTime();
-                var distance = countDownDate - now;
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-
-                document.getElementById("countdown").innerHTML = days;
-
-                if (distance < 0) {
-                    clearInterval(countdownfunction);
-                    document.getElementById("countdown").innerHTML = "EXPIRED";
-                }
-            }, 1000);
-
-            // Show login popup when gear icon is clicked
-            document.getElementById("gear-icon").onclick = function() {
-                document.getElementById("login-popup").style.display = "block";
-            };
-
-            // Fetch users.json and define the checkCredentials function
+            // Function to check user credentials
             async function checkCredentials(username, password) {
                 try {
                     const response = await fetch('users.json');
@@ -328,28 +302,74 @@
                 const welcomeMessage = document.getElementById("welcome-message");
 
                 if (user) {
+                    localStorage.setItem('loggedIn', 'true');
+                    localStorage.setItem('username', username);
                     welcomeMessage.textContent = "Welcome " + username + "!";
                     setTimeout(() => {
                         document.getElementById("login-popup").style.display = "none";
-
-                        // Add new items to the drop-down menu
-                        var menu = document.getElementById("menu");
-                        var newLink1 = document.createElement("a");
-                        newLink1.href = "secret.html";
-                        newLink1.textContent = "Hidden Details";
-                        
-                        var newLink2 = document.createElement("a");
-                        newLink2.href = "spotify.html";
-                        newLink2.textContent = "Spotify";
-                        
-                        menu.appendChild(newLink1);
-                        menu.appendChild(newLink2);
+                        updateMenu();
                     }, 1000); // Show welcome message for 1 second
                 } else {
                     welcomeMessage.textContent = "Incorrect username or password. Please try again.";
                     welcomeMessage.style.color = "red";
                 }
             };
+
+            function updateMenu() {
+                if (localStorage.getItem('loggedIn') === 'true') {
+                    var menu = document.getElementById("menu");
+                    if (!document.getElementById("secret-link")) {
+                        var newLink1 = document.createElement("a");
+                        newLink1.id = "secret-link";
+                        newLink1.href = "secret.html";
+                        newLink1.textContent = "Hidden Details";
+                        
+                        var newLink2 = document.createElement("a");
+                        newLink2.id = "spotify-link";
+                        newLink2.href = "spotify.html";
+                        newLink2.textContent = "Spotify";
+                        
+                        menu.appendChild(newLink1);
+                        menu.appendChild(newLink2);
+                    }
+                }
+            }
+
+            // Show login popup when gear icon is clicked
+            document.getElementById("gear-icon").onclick = function() {
+                if (localStorage.getItem('loggedIn') !== 'true') {
+                    document.getElementById("login-popup").style.display = "block";
+                }
+            };
+
+            // Check login status on page load
+            window.onload = function() {
+                updateMenu();
+                if (localStorage.getItem('loggedIn') === 'true') {
+                    document.getElementById("gear-icon").style.display = 'none'; // Hide gear icon if already logged in
+                }
+            };
+
+            // Hamburger menu toggle
+            document.getElementById("hamburger-menu").onclick = function() {
+                this.classList.toggle("active");
+                document.getElementById("menu").classList.toggle("active");
+            };
+
+            // Countdown Timer Script (Days Only)
+            var countDownDate = new Date("Sep 13, 2025 00:00:00").getTime();
+            var countdownfunction = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+                document.getElementById("countdown").innerHTML = days;
+
+                if (distance < 0) {
+                    clearInterval(countdownfunction);
+                    document.getElementById("countdown").innerHTML = "EXPIRED";
+                }
+            }, 1000);
         </script>
     </div>
 </body>

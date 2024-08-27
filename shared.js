@@ -21,9 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
     } else {
         // Show login option when not logged in
-        menuOptions += `
-            <a href="#" id="loginButton">Login</a>
-        `;
+  //      menuOptions += `
+  //          <a href="#" id="loginButton">Login</a>
+  //      `;
     }
 
     // Update the menu with the correct options

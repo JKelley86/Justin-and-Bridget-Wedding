@@ -1,78 +1,85 @@
 // shared.js
 
+// Function to show the login popup
+function showLoginPopup() {
+    document.getElementById("login-popup").style.display = "block";
+}
+
+// Function to hide the login popup
+function hideLoginPopup() {
+    document.getElementById("login-popup").style.display = "none";
+}
+
 // Function to check user credentials
-async function checkCredentials(username, password) {
-    try {
-        const response = await fetch('users.json');
-        if (!response.ok) throw new Error('Network response was not ok');
-        const users = await response.json();
-        return users.find(user => user.username === username && user.password === password);
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        return null;
-    }
+function checkCredentials(username, password, callback) {
+    fetch('users.json')
+        .then(response => response.json())
+        .then(users => {
+            const user = users.find(u => u.username === username && u.password === password);
+            callback(user);
+        })
+        .catch(error => {
+            console.error('Error fetching users:', error);
+            callback(null);
+        });
 }
 
-// Handle login
+// Function to handle login
 function handleLogin() {
-    document.getElementById("login-button").onclick = async function() {
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-        const user = await checkCredentials(username, password);
-        const welcomeMessage = document.getElementById("welcome-message");
-
+    checkCredentials(username, password, function(user) {
         if (user) {
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('username', username);
-            welcomeMessage.textContent = "Welcome " + username + "!";
-            setTimeout(() => {
-                document.getElementById("login-popup").style.display = "none";
-                updateMenu();
-            }, 1000); // Show welcome message for 1 second
+            sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+            alert("Welcome " + username + "!");
+            hideLoginPopup();
+            updateMenu();
         } else {
-            welcomeMessage.textContent = "Incorrect username or password. Please try again.";
-            welcomeMessage.style.color = "red";
+            alert("Incorrect username or password. Please try again.");
         }
-    };
+    });
 }
 
-// Update menu based on login status
+// Function to handle logout
+function handleLogout() {
+    sessionStorage.removeItem("loggedInUser");
+    alert("You have been logged out.");
+    updateMenu(); // Update menu to reflect logout state
+}
+
+// Function to update menu based on login state
 function updateMenu() {
-    if (localStorage.getItem('loggedIn') === 'true') {
-        var menu = document.getElementById("menu");
-        if (!document.getElementById("secret-link")) {
-            var newLink1 = document.createElement("a");
-            newLink1.id = "secret-link";
-            newLink1.href = "secret.html";
-            newLink1.textContent = "Hidden Details";
-            
-            var newLink2 = document.createElement("a");
-            newLink2.id = "spotify-link";
-            newLink2.href = "spotify.html";
-            newLink2.textContent = "Spotify";
-            
-            menu.appendChild(newLink1);
-            menu.appendChild(newLink2);
-        }
+    const menu = document.getElementById("menu");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
+
+    if (loggedInUser) {
+        menu.innerHTML = `
+            <a href="index.html">Home</a>
+            <a href="ourstory.html">Our Story</a>
+            <a href="info.html">Info</a>
+            <a href="weddingparty.html">Wedding Party</a>
+            <a href="registry.html">Registry</a>
+            <a href="rsvp.html">RSVP</a>
+            <a href="spotify.html">Spotify</a>
+            <a href="secret.html">Hidden Details</a>
+            <a href="#" id="logout-button">Logout</a>
+        `;
+        document.getElementById("logout-button").addEventListener("click", handleLogout);
+    } else {
+        menu.innerHTML = `
+            <a href="index.html">Home</a>
+            <a href="ourstory.html">Our Story</a>
+            <a href="info.html">Info</a>
+            <a href="weddingparty.html">Wedding Party</a>
+            <a href="registry.html">Registry</a>
+            <a href="rsvp.html">RSVP</a>
+        `;
     }
 }
 
-// Show login popup when gear icon is clicked
-function setupGearIcon() {
-    document.getElementById("gear-icon").onclick = function() {
-        if (localStorage.getItem('loggedIn') !== 'true') {
-            document.getElementById("login-popup").style.display = "block";
-        }
-    };
-}
+// Event listener for login button
+document.getElementById("login-button").addEventListener("click", handleLogin);
 
-// Check login status on page load
-window.onload = function() {
-    updateMenu();
-    if (localStorage.getItem('loggedIn') === 'true') {
-        document.getElementById("gear-icon").style.display = 'none'; // Hide gear icon if already logged in
-    }
-    handleLogin();
-    setupGearIcon();
-};
+// Check if user is logged in on page load
+document.addEventListener("DOMContentLoaded", updateMenu);

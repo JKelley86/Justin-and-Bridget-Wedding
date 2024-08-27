@@ -32,9 +32,9 @@
             justify-content: flex-start;
             padding-top: 20px;
         }
-	main {
- 	   padding-bottom: 70px; /* Adjust this value as needed */
-	}
+        main {
+            padding-bottom: 70px; /* Adjust this value as needed */
+        }
         h1 {
             text-align: center;
             color: white;
@@ -68,7 +68,7 @@
             color: black;
             font-size: 100px;
             margin-top: 20px;
-	    margin-bottom: 40px;
+            margin-bottom: 40px;
         }
         #countdown-container {
             text-align: center;
@@ -128,6 +128,7 @@
             border-radius: 4px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             width: 150px;
+            z-index: 1001;
         }
         .menu a {
             padding: 10px;
@@ -167,7 +168,7 @@
             background-color: #CABEA6;
             color: black;
             font-size: 18px;
-  	    margin: 0 auto; /* Center the section horizontally */
+            margin: 0 auto; /* Center the section horizontally */
         }
         .details-section div {
             text-align: center;
@@ -178,18 +179,18 @@
             height: 60px;
             margin: 0 20px;
         }
-	    #gear-icon-container {
-        position: sticky;
-        bottom: 20px;
-        right: 30px;
-        z-index: 1000;
-	margin-bottom: 50px;
-    }
-    #gear-icon {
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-    }
+        #gear-icon-container {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 1002;
+            margin-bottom: 50px;
+        }
+        #gear-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
         #login-popup {
             display: none; /* Hidden by default */
             position: fixed;
@@ -199,7 +200,7 @@
             background-color: white;
             padding: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            z-index: 1001;
+            z-index: 1003;
             border-radius: 8px;
         }
         #login-popup input[type="text"], #login-popup input[type="password"] {
@@ -272,87 +273,31 @@
             <button id="login-button">Login</button>
             <div id="welcome-message"></div>
         </div>
-
-<script>
-    function updateMenu() {
-        var menu = document.getElementById("menu");
-        menu.innerHTML = ""; // Clear existing menu items
-
-        if (localStorage.getItem('loggedIn') === 'true') {
-            var hiddenDetailsLink = document.createElement("a");
-            hiddenDetailsLink.href = "secret.html";
-            hiddenDetailsLink.textContent = "Hidden Details";
-            menu.appendChild(hiddenDetailsLink);
-
-            var spotifyLink = document.createElement("a");
-            spotifyLink.href = "spotify.html";
-            spotifyLink.textContent = "Spotify";
-            menu.appendChild(spotifyLink);
-
-            var logoutLink = document.createElement("a");
-            logoutLink.href = "#";
-            logoutLink.textContent = "Logout";
-            logoutLink.id = "logout-link";
-            menu.appendChild(logoutLink);
-
-            document.getElementById("gear-icon").style.display = 'none'; // Hide gear icon if logged in
-        } else {
-            var loginLink = document.createElement("a");
-            loginLink.href = "#";
-            loginLink.textContent = "Login";
-            loginLink.id = "login-link";
-            menu.appendChild(loginLink);
-        }
-    }
-
-    // Handle logout
-    document.addEventListener("click", function(event) {
-        if (event.target && event.target.id === "logout-link") {
-            event.preventDefault();
-            localStorage.removeItem('loggedIn');
-            localStorage.removeItem('username');
-            document.getElementById("gear-icon").style.display = 'block'; // Show gear icon after logout
-            updateMenu();
-        }
-    });
-
-    // Existing code...
-    // Show login popup when gear icon is clicked
-    document.getElementById("gear-icon").onclick = function() {
-        if (localStorage.getItem('loggedIn') !== 'true') {
-            document.getElementById("login-popup").style.display = "block";
-        }
-    };
-
-    // Check login status on page load
-    window.onload = function() {
-        updateMenu();
-        if (localStorage.getItem('loggedIn') === 'true') {
-            document.getElementById("gear-icon").style.display = 'none'; // Hide gear icon if already logged in
-        }
-    };
-
-    // Hamburger menu toggle
-    document.getElementById("hamburger-menu").onclick = function() {
-        this.classList.toggle("active");
-        document.getElementById("menu").classList.toggle("active");
-    };
-
-    // Countdown Timer Script (Days Only)
-    var countDownDate = new Date("Sep 13, 2025 00:00:00").getTime();
-    var countdownfunction = setInterval(function() {
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-
-        document.getElementById("countdown").innerHTML = days;
-
-        if (distance < 0) {
-            clearInterval(countdownfunction);
-            document.getElementById("countdown").innerHTML = "EXPIRED";
-        }
-    }, 1000);
-</script>
     </div>
+
+    <script src="shared.js"></script>
+    <script>
+        const gearIcon = document.getElementById('gear-icon');
+        const loginPopup = document.getElementById('login-popup');
+
+        gearIcon.addEventListener('click', () => {
+            loginPopup.style.display = 'block';
+        });
+
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const menu = document.getElementById('menu');
+
+        hamburgerMenu.addEventListener('click', () => {
+            hamburgerMenu.classList.toggle('active');
+            menu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+                menu.classList.remove('show');
+                hamburgerMenu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>

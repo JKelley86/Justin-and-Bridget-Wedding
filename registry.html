@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Registry - Justin & Bridget's Wedding</title>
+    <!-- Load Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pompiere&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        html, body {
+            background-color: #CABEA6;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Pompiere', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 20px;
+        }
+	main {
+ 	   padding-bottom: 70px; /* Adjust this value as needed */
+	}
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 40px;
+            margin-top: 40;
+        }
+        h2 {
+            text-align: center;
+            color: white;
+            font-size: 25px;
+            margin-top: 10px;
+        }
+        h3, h4 {
+            text-align: center;
+            color: black;
+            font-size: 25px;
+        }
+        p {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .sub-text {
+            color: black;
+            font-size: 16px;
+            text-align: center;
+        }
+        h5 {
+            text-align: center;
+            color: black;
+            font-size: 100px;
+            margin-top: 20px;
+	    margin-bottom: 40px;
+        }
+        #countdown-container {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            display: center;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: transparent;
+        }
+        .logo-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .logo-image {
+            max-width: 15%;
+            height: auto;
+        }
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .hamburger-menu {
+            width: 30px;
+            height: 30px;
+            background-color:  #CABEA6;
+            position: relative;
+            cursor: pointer;
+        }
+        .hamburger-menu div {
+            width: 100%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            background-color: #709B67;
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            border-radius: 4px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 150px;
+        }
+        .menu a {
+            padding: 10px;
+            color: black;
+            text-decoration: none;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .menu a:last-child {
+            border-bottom: none;
+        }
+        .menu a:hover {
+            background-color: #e0e0e0;
+        }
+        .hamburger-menu.active div:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .hamburger-menu.active div:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.active div:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        .hamburger-menu.active + .menu {
+            display: flex;
+        }
+        .full-width-image {
+            width: 100%;
+            height: auto;
+        }
+        .details-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            padding: 20px;
+            background-color: #CABEA6;
+            color: black;
+            font-size: 18px;
+  	    margin: 0 auto; /* Center the section horizontally */
+        }
+        .details-section div {
+            text-align: center;
+        }
+        .details-section .vertical-line {
+            width: 2px;
+            background-color: black;
+            height: 60px;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="hamburger-menu" id="hamburger-menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="menu" id="menu">
+                <a href="index.html">Home</a>
+                <a href="ourstory.html">Our Story</a>
+                <a href="info.html">Info</a>
+		            <a href="weddingparty.html">Wedding Party</a>
+                <a href="registry.html">Registry</a>
+                <a href="rsvp.html">RSVP</a>
+            </div>
+        </nav>
+        
+        <main>
+            <h1>REGISTRY</h1>
+            <div class="logo-container">
+                <img src="pictures/weddinglogo.jpeg" alt="Wedding Logo" class="logo-image">
+            </div>
+            <h2>JUSTIN & BRIDGET</h2>
+            <img src="pictures/info.jpg" alt="Wedding Image" class="full-width-image">
+	        <h3>Amazon List</h3>
+          <iframe src="https://www.amazon.com/hz/wishlist/ls/268WR4235GF3N/ref=nav_wishlist_lists_2" width="100%" height="600px" frameborder="0"></iframe>
+
+	   <h5>J&B</h5>
+        </main>
+
+        <script>
+            // Hamburger menu toggle
+            document.getElementById("hamburger-menu").onclick = function() {
+                this.classList.toggle("active");
+                document.getElementById("menu").classList.toggle("active");
+            };
+
+            // Countdown Timer Script (Days Only)
+            var countDownDate = new Date("Sep 13, 2025 00:00:00").getTime();
+            var countdownfunction = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+                document.getElementById("countdown").innerHTML = days;
+
+                if (distance < 0) {
+                    clearInterval(countdownfunction);
+                    document.getElementById("countdown").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+        </script>
+    </div>
+</body>
+</html>

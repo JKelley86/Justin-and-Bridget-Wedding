@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const loggedIn = localStorage.getItem("loggedIn") === "true";
 
     // Always display these options
-    menu.innerHTML = `
+    let menuOptions = `
         <a href="index.html">Home</a>
         <a href="ourstory.html">Our Story</a>
         <a href="info.html">Info</a>
@@ -14,23 +14,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (loggedIn) {
         // Add additional options for logged-in users
-        menu.innerHTML += `
+        menuOptions += `
             <a href="hiddendetails.html">Hidden Details</a>
             <a href="spotify.html">Spotify</a>
             <a href="#" id="logoutButton">Logout</a>
         `;
     } else {
         // Show login option when not logged in
-        menu.innerHTML += `
+        menuOptions += `
             <a href="#" id="loginButton">Login</a>
         `;
     }
 
+    // Update the menu with the correct options
+    menu.innerHTML = menuOptions;
+
+    // Logout functionality
     document.getElementById("logoutButton")?.addEventListener("click", function () {
         localStorage.removeItem("loggedIn");
         window.location.reload();
     });
 
+    // Show login popup
     document.getElementById("loginButton")?.addEventListener("click", function () {
         showLoginPopup();
     });

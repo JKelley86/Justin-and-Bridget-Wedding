@@ -190,6 +190,44 @@
         height: 30px;
         cursor: pointer;
     }
+        #login-popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            border-radius: 8px;
+        }
+        #login-popup input[type="text"], #login-popup input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #login-popup button {
+            background-color: #709B67;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #login-popup button:hover {
+            background-color: #557a50;
+        }
+        #welcome-message {
+            text-align: center;
+            font-size: 18px;
+            color: green;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -232,6 +270,14 @@
                 <img src="pictures/gearicon.jpg" alt="Settings" id="gear-icon">
             </div>
         </main>
+        <!-- Login Popup -->
+        <div id="login-popup">
+            <h3>Login</h3>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button id="login-button">Login</button>
+            <div id="welcome-message"></div>
+        </div>
 
         <script>
             // Hamburger menu toggle
@@ -255,38 +301,37 @@
                 }
             }, 1000);
 
-            // Function to check user credentials
-fetch('users.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(users => {
-        console.log('Users JSON:', users);
-        if (Array.isArray(users)) {
-            const user = users.find(u => u.username === username && u.password === password);
-            callback(user);
-        } else {
-            console.error('Fetched data is not an array:', users);
-            callback(null);
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching users:', error);
-        callback(null);
-    });
-
-            // Gear icon click handler
+            // Show login popup when gear icon is clicked
             document.getElementById("gear-icon").onclick = function() {
-                var username = prompt("Please enter your username:");
-                var password = prompt("Please enter your password:");
+                document.getElementById("login-popup").style.display = "block";
+            };
 
-                checkCredentials(username, password, function(user) {
-                    if (user) {
-                        alert("Welcome " + username + "!");
-                        
+            // Fetch users.json and define the checkCredentials function
+            async function checkCredentials(username, password) {
+                try {
+                    const response = await fetch('users.json');
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    const users = await response.json();
+                    return users.find(user => user.username === username && user.password === password);
+                } catch (error) {
+                    console.error('Error fetching users:', error);
+                    return null;
+                }
+            }
+
+            // Handle login
+            document.getElementById("login-button").onclick = async function() {
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                const user = await checkCredentials(username, password);
+                const welcomeMessage = document.getElementById("welcome-message");
+
+                if (user) {
+                    welcomeMessage.textContent = "Welcome " + username + "!";
+                    setTimeout(() => {
+                        document.getElementById("login-popup").style.display = "none";
+
                         // Add new items to the drop-down menu
                         var menu = document.getElementById("menu");
                         var newLink1 = document.createElement("a");
@@ -299,13 +344,13 @@ fetch('users.json')
                         
                         menu.appendChild(newLink1);
                         menu.appendChild(newLink2);
-                    } else if (username !== null && password !== null) {
-                        alert("Incorrect username or password. Please try again.");
-                    }
-                });
+                    }, 1000); // Show welcome message for 1 second
+                } else {
+                    welcomeMessage.textContent = "Incorrect username or password. Please try again.";
+                    welcomeMessage.style.color = "red";
+                }
             };
         </script>
     </div>
 </body>
 </html>
-

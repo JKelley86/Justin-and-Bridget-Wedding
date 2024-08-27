@@ -1,85 +1,72 @@
-// shared.js
-
-// Function to show the login popup
-function showLoginPopup() {
-    document.getElementById("login-popup").style.display = "block";
-}
-
-// Function to hide the login popup
-function hideLoginPopup() {
-    document.getElementById("login-popup").style.display = "none";
-}
-
-// Function to check user credentials
-function checkCredentials(username, password, callback) {
-    fetch('users.json')
-        .then(response => response.json())
-        .then(users => {
-            const user = users.find(u => u.username === username && u.password === password);
-            callback(user);
-        })
-        .catch(error => {
-            console.error('Error fetching users:', error);
-            callback(null);
-        });
-}
-
-// Function to handle login
-function handleLogin() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    checkCredentials(username, password, function(user) {
-        if (user) {
-            sessionStorage.setItem("loggedInUser", JSON.stringify(user));
-            alert("Welcome " + username + "!");
-            hideLoginPopup();
-            updateMenu();
-        } else {
-            alert("Incorrect username or password. Please try again.");
-        }
-    });
-}
-
-// Function to handle logout
-function handleLogout() {
-    sessionStorage.removeItem("loggedInUser");
-    alert("You have been logged out.");
-    updateMenu(); // Update menu to reflect logout state
-}
-
-// Function to update menu based on login state
-function updateMenu() {
+document.addEventListener("DOMContentLoaded", function () {
     const menu = document.getElementById("menu");
-    const loggedInUser = sessionStorage.getItem("loggedInUser");
+    const loggedIn = localStorage.getItem("loggedIn") === "true";
 
-    if (loggedInUser) {
-        menu.innerHTML = `
-            <a href="index.html">Home</a>
-            <a href="ourstory.html">Our Story</a>
-            <a href="info.html">Info</a>
-            <a href="weddingparty.html">Wedding Party</a>
-            <a href="registry.html">Registry</a>
-            <a href="rsvp.html">RSVP</a>
+    // Always display these options
+    menu.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="ourstory.html">Our Story</a>
+        <a href="info.html">Info</a>
+        <a href="weddingparty.html">Wedding Party</a>
+        <a href="registry.html">Registry</a>
+        <a href="rsvp.html">RSVP</a>
+    `;
+
+    if (loggedIn) {
+        // Add additional options for logged-in users
+        menu.innerHTML += `
+            <a href="hiddendetails.html">Hidden Details</a>
             <a href="spotify.html">Spotify</a>
-            <a href="secret.html">Hidden Details</a>
-            <a href="#" id="logout-button">Logout</a>
+            <a href="#" id="logoutButton">Logout</a>
         `;
-        document.getElementById("logout-button").addEventListener("click", handleLogout);
     } else {
-        menu.innerHTML = `
-            <a href="index.html">Home</a>
-            <a href="ourstory.html">Our Story</a>
-            <a href="info.html">Info</a>
-            <a href="weddingparty.html">Wedding Party</a>
-            <a href="registry.html">Registry</a>
-            <a href="rsvp.html">RSVP</a>
+        // Show login option when not logged in
+        menu.innerHTML += `
+            <a href="#" id="loginButton">Login</a>
         `;
     }
-}
 
-// Event listener for login button
-document.getElementById("login-button").addEventListener("click", handleLogin);
+    document.getElementById("logoutButton")?.addEventListener("click", function () {
+        localStorage.removeItem("loggedIn");
+        window.location.reload();
+    });
 
-// Check if user is logged in on page load
-document.addEventListener("DOMContentLoaded", updateMenu);
+    document.getElementById("loginButton")?.addEventListener("click", function () {
+        showLoginPopup();
+    });
+
+    function showLoginPopup() {
+        const popup = document.createElement("div");
+        popup.classList.add("login-popup");
+        popup.innerHTML = `
+            <div class="login-container">
+                <h2>Login</h2>
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <button id="loginSubmit">Login</button>
+                <button id="cancelButton">Cancel</button>
+            </div>
+        `;
+        document.body.appendChild(popup);
+
+        document.getElementById("loginSubmit").addEventListener("click", function () {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === "yourUsername" && password === "yourPassword") {
+                localStorage.setItem("loggedIn", "true");
+                popup.innerHTML = "<h2>Welcome!</h2>";
+                setTimeout(() => {
+                    document.body.removeChild(popup);
+                    window.location.reload();
+                }, 1000);
+            } else {
+                alert("Incorrect username or password");
+            }
+        });
+
+        document.getElementById("cancelButton").addEventListener("click", function () {
+            document.body.removeChild(popup);
+        });
+    }
+});

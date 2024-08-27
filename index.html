@@ -256,17 +256,27 @@
             }, 1000);
 
             // Function to check user credentials
-            function checkCredentials(username, password, callback) {
-                fetch('users.json')
-                    .then(response => response.json())
-                    .then(users => {
-                        const user = users.find(u => u.username === username && u.password === password);
-                        callback(user);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching users:', error);
-                        callback(null);
-                    });
+fetch('users.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(users => {
+        console.log('Users JSON:', users);
+        if (Array.isArray(users)) {
+            const user = users.find(u => u.username === username && u.password === password);
+            callback(user);
+        } else {
+            console.error('Fetched data is not an array:', users);
+            callback(null);
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching users:', error);
+        callback(null);
+    });
             }
 
             // Gear icon click handler

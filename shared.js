@@ -1,31 +1,46 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const menu = document.getElementById('menu');
 
-    // Handle logout
-    menu.addEventListener('click', (event) => {
-        if (event.target.id === 'logout') {
-            localStorage.removeItem('loggedIn');
-            updateMenu(false);
-        }
+    // Check login status on page load
+    checkLoginStatus();
+
+    // Handle hamburger menu toggle
+    hamburgerMenu.addEventListener('click', function() {
+        this.classList.toggle('active');
+        menu.classList.toggle('active');
     });
 
-   
-        if (isLoggedIn) {
-            // Show additional options when logged in
-            const hiddenDetailsLink = document.createElement('a');
-            hiddenDetailsLink.href = 'hidden-details.html';
-            hiddenDetailsLink.textContent = 'Hidden Details';
-            menu.appendChild(hiddenDetailsLink);
+    // Function to show additional menu items when logged in
+    function showLoggedInMenuItems() {
+        const hiddenDetails = document.createElement('a');
+        hiddenDetails.href = 'hiddendetails.html';
+        hiddenDetails.textContent = 'Hidden Details';
 
-            const spotifyLink = document.createElement('a');
-            spotifyLink.href = 'spotify.html';
-            spotifyLink.textContent = 'Spotify';
-            menu.appendChild(spotifyLink);
+        const spotify = document.createElement('a');
+        spotify.href = 'spotify.html';
+        spotify.textContent = 'Spotify';
 
-            const logoutLink = document.createElement('a');
-            logoutLink.href = '#';
-            logoutLink.textContent = 'Logout';
-            logoutLink.id = 'logout';
-            menu.appendChild(logoutLink);
+        const logout = document.createElement('a');
+        logout.href = '#';
+        logout.textContent = 'Logout';
+        logout.addEventListener('click', function() {
+            localStorage.removeItem('loggedIn');
+            localStorage.removeItem('username');
+            location.reload();  // Reload the page to reset the menu
+        });
 
-    // Initialize menu
-    updateMenu(localStorage.getItem('loggedIn') === 'true');
+        menu.appendChild(hiddenDetails);
+        menu.appendChild(spotify);
+        menu.appendChild(logout);
+    }
+
+    // Function to check if the user is logged in
+    function checkLoginStatus() {
+        const loggedIn = localStorage.getItem('loggedIn');
+
+        if (loggedIn === 'true') {
+            showLoggedInMenuItems();
+        }
+    }
 });

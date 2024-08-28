@@ -301,7 +301,18 @@
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
             const welcomeMessage = document.getElementById('welcome-message');
-
+            let users = {};
+            
+            // Fetch the users.json file
+            fetch('users.json')
+                .then(response => response.json())
+                .then(data => {
+                    users = data;
+                })
+                .catch(error => {
+                    console.error('Error loading users:', error);
+                });
+            
             // Handle hamburger menu toggle
             hamburgerMenu.addEventListener('click', function() {
                 this.classList.toggle('active');
@@ -321,8 +332,8 @@
                 const username = usernameInput.value;
                 const password = passwordInput.value;
 
-                if (username === 'justin' && password === 'bridget') {
-                    welcomeMessage.textContent = 'Welcome, Justin!';
+                if (users[username] && users[username] === password) {
+                    welcomeMessage.textContent = `Welcome, ${username}!`;
                     setTimeout(function() {
                         loginPopup.style.display = 'none';
                         showLoggedInMenuItems();

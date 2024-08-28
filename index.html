@@ -289,7 +289,6 @@
         </div>
     </div>
 
-    //<script src="shared.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburgerMenu = document.getElementById('hamburger-menu');
@@ -350,28 +349,7 @@
             });
 
             // Show additional menu items when logged in
-            function showLoggedInMenuItems() {
-                const hiddenDetails = document.createElement('a');
-                hiddenDetails.href = 'hiddendetails.html';
-                hiddenDetails.textContent = 'Hidden Details';
-                menu.appendChild(hiddenDetails);
 
-                const spotify = document.createElement('a');
-                spotify.href = 'spotify.html';
-                spotify.textContent = 'Spotify';
-                menu.appendChild(spotify);
-
-                const logout = document.createElement('a');
-                logout.href = '#';
-                logout.textContent = 'Logout';
-                logout.addEventListener('click', function() {
-                    menu.removeChild(hiddenDetails);
-                    menu.removeChild(spotify);
-                    menu.removeChild(logout);
-                });
-                menu.appendChild(logout);
-            }
-        });
 
             // Function to check if the user is logged in
     function checkLoginStatus() {
@@ -402,5 +380,6 @@
 
     checkLoginStatus();
     </script>
+    <script src="shared.js"></script>
 </body>
 </html>

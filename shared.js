@@ -5,12 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check login status on page load
     checkLoginStatus();
 
-    // Handle hamburger menu toggle
-    hamburgerMenu.addEventListener('click', function() {
-        this.classList.toggle('active');
-        menu.classList.toggle('active');
-    });
-
     // Function to show additional menu items when logged in
     function showLoggedInMenuItems() {
         const hiddenDetails = document.createElement('a');

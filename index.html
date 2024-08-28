@@ -336,6 +336,7 @@
                     welcomeMessage.textContent = `Welcome, ${username}!`;
                     setTimeout(function() {
                         loginPopup.style.display = 'none';
+                        localStorage.setItem('loggedIn', 'true');
                         showLoggedInMenuItems();
                     }, 1000);
                 } else {

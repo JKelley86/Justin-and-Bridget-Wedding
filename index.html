@@ -228,6 +228,13 @@
             color: green;
             margin-top: 10px;
         }
+        #cancel-button {
+            background-color: #d9534f; /* Red color for the cancel button */
+            margin-top: 10px;
+        }
+        #cancel-button:hover {
+            background-color: #c9302c;
+        }
     </style>
 </head>
 <body>
@@ -277,81 +284,52 @@
             <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
             <button id="login-button">Login</button>
-            <div id="welcome-message"></div>
+            <button id="cancel-button">Cancel</button>
+            <div id="welcome-message" style="display: none;"></div>
         </div>
-  	<script src="shared.js"></script>
-        <script>
-            // Hamburger menu toggle
-            document.getElementById("hamburger-menu").onclick = function() {
-                this.classList.toggle("active");
-                document.getElementById("menu").classList.toggle("active");
-            };
-
-            // Countdown Timer Script (Days Only)
-            var countDownDate = new Date("Sep 13, 2025 00:00:00").getTime();
-            var countdownfunction = setInterval(function() {
-                var now = new Date().getTime();
-                var distance = countDownDate - now;
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-
-                document.getElementById("countdown").innerHTML = days;
-
-                if (distance < 0) {
-                    clearInterval(countdownfunction);
-                    document.getElementById("countdown").innerHTML = "EXPIRED";
-                }
-            }, 1000);
-
-            // Show login popup when gear icon is clicked
-            document.getElementById("gear-icon").onclick = function() {
-                document.getElementById("login-popup").style.display = "block";
-            };
-
-            // Fetch users.json and define the checkCredentials function
-            async function checkCredentials(username, password) {
-                try {
-                    const response = await fetch('users.json');
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    const users = await response.json();
-                    return users.find(user => user.username === username && user.password === password);
-                } catch (error) {
-                    console.error('Error fetching users:', error);
-                    return null;
-                }
-            }
-
-            // Handle login
-            document.getElementById("login-button").onclick = async function() {
-                const username = document.getElementById("username").value;
-                const password = document.getElementById("password").value;
-
-                const user = await checkCredentials(username, password);
-                const welcomeMessage = document.getElementById("welcome-message");
-
-                if (user) {
-                    welcomeMessage.textContent = "Welcome " + username + "!";
-                    setTimeout(() => {
-                        document.getElementById("login-popup").style.display = "none";
-
-                        // Add new items to the drop-down menu
-                        var menu = document.getElementById("menu");
-                        var newLink1 = document.createElement("a");
-                        newLink1.href = "secret.html";
-                        newLink1.textContent = "Hidden Details";
-                        
-                        var newLink2 = document.createElement("a");
-                        newLink2.href = "spotify.html";
-                        newLink2.textContent = "Spotify";
-                        
-                        menu.appendChild(newLink1);
-                        menu.appendChild(newLink2);
-                    }, 1000); // Show welcome message for 1 second
-                } else {
-                    welcomeMessage.textContent = "Incorrect username or password. Please try again.";
-                    welcomeMessage.style.color = "red";
-                }
-            };
-        </script>
     </div>
+
+    <script src="shared.js"></script>
+    <script>
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const menu = document.getElementById('menu');
+        const loginPopup = document.getElementById('login-popup');
+        const loginButton = document.getElementById('login-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const welcomeMessage = document.getElementById('welcome-message');
+
+        hamburgerMenu.addEventListener('click', () => {
+            hamburgerMenu.classList.toggle('active');
+            menu.classList.toggle('active');
+        });
+
+        const gearIcon = document.getElementById('gear-icon');
+        gearIcon.addEventListener('click', () => {
+            loginPopup.style.display = 'block';
+        });
+
+        loginButton.addEventListener('click', () => {
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+
+            if (username === 'correctUsername' && password === 'correctPassword') {
+                welcomeMessage.style.display = 'block';
+                welcomeMessage.textContent = 'Welcome!';
+                setTimeout(() => {
+                    loginPopup.style.display = 'none';
+                    welcomeMessage.style.display = 'none';
+                    // Add logic to show additional menu options
+                }, 1000);
+            } else {
+                loginPopup.style.display = 'none';
+            }
+        });
+
+        cancelButton.addEventListener('click', () => {
+            loginPopup.style.display = 'none';
+        });
+    </script>
 </body>
 </html>

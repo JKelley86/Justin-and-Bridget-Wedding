@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to show additional menu items when logged in
     function showLoggedInMenuItems() {
         const hiddenDetails = document.createElement('a');
-        hiddenDetails.href = 'hiddendetails.html';
+        hiddenDetails.href = 'secret.html';
         hiddenDetails.textContent = 'Hidden Details';
 
         const spotify = document.createElement('a');

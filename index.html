@@ -350,9 +350,15 @@
                         var newLink2 = document.createElement("a");
                         newLink2.href = "spotify.html";
                         newLink2.textContent = "Spotify";
-                        
-                        menu.appendChild(newLink1);
-                        menu.appendChild(newLink2);
+			    
+            var logoutLink = document.createElement("a");
+            logoutLink.href = "#";
+            logoutLink.textContent = "Logout";
+            logoutLink.onclick = logout;
+
+            menu.appendChild(newLink1);
+            menu.appendChild(newLink2);
+            menu.appendChild(logoutLink);
                     }, 1000); // Show welcome message for 1 second
                 } else {
                     welcomeMessage.textContent = "Incorrect username or password. Please try again.";
@@ -362,6 +368,23 @@
 	        cancelButton.addEventListener('click', () => {
             loginPopup.style.display = 'none';
         });
+// Handle Logout
+function logout() {
+    // Remove new menu items
+    var menu = document.getElementById("menu");
+    var hiddenLinks = menu.querySelectorAll("a[href='secret.html'], a[href='spotify.html']");
+    hiddenLinks.forEach(link => link.remove());
+
+    // Show login popup again
+    document.getElementById("login-popup").style.display = "block";
+}
+
+// Add Logout link
+var logoutLink = document.createElement("a");
+logoutLink.href = "#";
+logoutLink.textContent = "Logout";
+logoutLink.onclick = logout;
+menu.appendChild(logoutLink);
         </script>
     </div>
 </body>

@@ -393,11 +393,14 @@
                 clearInterval(countdownInterval);
                 countdownElement.innerHTML = "0";
                 return;
+} else {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                countdownElement.textContent = days;
             }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            countdownElement.innerHTML = days;
         }, 1000);
+    }
+
+    checkLoginStatus();
     </script>
 </body>
 </html>

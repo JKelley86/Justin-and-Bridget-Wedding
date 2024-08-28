@@ -32,14 +32,14 @@
             justify-content: flex-start;
             padding-top: 20px;
         }
-	main {
- 	   padding-bottom: 70px; /* Adjust this value as needed */
-	}
+        main {
+            padding-bottom: 70px; /* Adjust this value as needed */
+        }
         h1 {
             text-align: center;
             color: white;
             font-size: 40px;
-            margin-top: 40;
+            margin-top: 40px;
         }
         h2 {
             text-align: center;
@@ -68,7 +68,7 @@
             color: black;
             font-size: 100px;
             margin-top: 20px;
-	    margin-bottom: 40px;
+            margin-bottom: 40px;
         }
         #countdown-container {
             text-align: center;
@@ -107,7 +107,7 @@
         .hamburger-menu {
             width: 30px;
             height: 30px;
-            background-color:  #CABEA6;
+            background-color: #CABEA6;
             position: relative;
             cursor: pointer;
         }
@@ -167,7 +167,7 @@
             background-color: #CABEA6;
             color: black;
             font-size: 18px;
-  	    margin: 0 auto; /* Center the section horizontally */
+            margin: 0 auto; /* Center the section horizontally */
         }
         .details-section div {
             text-align: center;
@@ -192,7 +192,7 @@
                 <a href="index.html">Home</a>
                 <a href="ourstory.html">Our Story</a>
                 <a href="info.html">Info</a>
-		<a href="weddingparty.html">Wedding Party</a>
+                <a href="weddingparty.html">Wedding Party</a>
                 <a href="registry.html">Registry</a>
                 <a href="rsvp.html">RSVP</a>
             </div>
@@ -204,35 +204,61 @@
                 <img src="pictures/weddinglogo.jpeg" alt="Wedding Logo" class="logo-image">
             </div>
             <h2>JUSTIN & BRIDGET</h2>
-<label for="background-color">Background Color:</label>
-<input type="color" id="background-color" name="background-color">
+            <label for="background-color">Background Color:</label>
+            <input type="color" id="background-color" name="background-color">
 
-<label for="navbar-color">Navbar Background Color:</label>
-<input type="color" id="navbar-color" name="navbar-color">
+            <label for="navbar-color">Navbar Background Color:</label>
+            <input type="color" id="navbar-color" name="navbar-color">
 
-<label for="text-color">Text Color:</label>
-<input type="color" id="text-color" name="text-color">
-	        </div>
-	   <h5>J&B</h5>
+            <label for="text-color">Text Color:</label>
+            <input type="color" id="text-color" name="text-color">
+            <h5>J&B</h5>
         </main>
 
         <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Load stored colors from localStorage
+                const backgroundColor = localStorage.getItem("backgroundColor");
+                const navbarColor = localStorage.getItem("navbarColor");
+                const textColor = localStorage.getItem("textColor");
 
-	document.addEventListener("DOMContentLoaded", function() {
-    const backgroundColor = localStorage.getItem("backgroundColor");
-    const navbarColor = localStorage.getItem("navbarColor");
-    const textColor = localStorage.getItem("textColor");
+                // Apply the colors if they exist
+                if (backgroundColor) {
+                    document.body.style.backgroundColor = backgroundColor;
+                }
+                if (navbarColor) {
+                    document.querySelector("nav").style.backgroundColor = navbarColor;
+                }
+                if (textColor) {
+                    document.body.style.color = textColor;
+                    document.querySelectorAll('h1, h2, h3, h4, p, .sub-text, h5').forEach(element => {
+                        element.style.color = textColor;
+                    });
+                }
 
-    if (backgroundColor) {
-        document.body.style.backgroundColor = backgroundColor;
-    }
-    if (navbarColor) {
-        document.querySelector("nav").style.backgroundColor = navbarColor;
-    }
-    if (textColor) {
-        document.body.style.color = textColor;
-    }
-});	
+                // Event listeners to save color changes
+                document.getElementById("background-color").addEventListener("input", function() {
+                    const selectedColor = this.value;
+                    document.body.style.backgroundColor = selectedColor;
+                    localStorage.setItem("backgroundColor", selectedColor);
+                });
+
+                document.getElementById("navbar-color").addEventListener("input", function() {
+                    const selectedColor = this.value;
+                    document.querySelector("nav").style.backgroundColor = selectedColor;
+                    localStorage.setItem("navbarColor", selectedColor);
+                });
+
+                document.getElementById("text-color").addEventListener("input", function() {
+                    const selectedColor = this.value;
+                    document.body.style.color = selectedColor;
+                    document.querySelectorAll('h1, h2, h3, h4, p, .sub-text, h5').forEach(element => {
+                        element.style.color = selectedColor;
+                    });
+                    localStorage.setItem("textColor", selectedColor);
+                });
+            });
+
             // Hamburger menu toggle
             document.getElementById("hamburger-menu").onclick = function() {
                 this.classList.toggle("active");
@@ -240,21 +266,18 @@
             };
 
             // Countdown Timer Script (Days Only)
-            var countDownDate = new Date("Sep 13, 2025 00:00:00").getTime();
-            var countdownfunction = setInterval(function() {
-                var now = new Date().getTime();
-                var distance = countDownDate - now;
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            function calculateDaysLeft() {
+                const weddingDate = new Date("2024-08-09T00:00:00");
+                const now = new Date();
+                const timeDifference = weddingDate - now;
+                const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+                document.getElementById("countdown-container").innerHTML = `<h2>${daysLeft} Days to go!</h2>`;
+            }
 
-                document.getElementById("countdown").innerHTML = days;
+            calculateDaysLeft();
+            setInterval(calculateDaysLeft, 86400000); // Update every 24 hours
 
-                if (distance < 0) {
-                    clearInterval(countdownfunction);
-                    document.getElementById("countdown").innerHTML = "EXPIRED";
-                }
-            }, 1000);
         </script>
-	<script src="shared.js"></script>
     </div>
 </body>
 </html>

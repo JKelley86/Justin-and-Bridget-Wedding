@@ -289,7 +289,7 @@
         </div>
     </div>
 
-    <script src="shared.js"></script>
+    //<script src="shared.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburgerMenu = document.getElementById('hamburger-menu');
@@ -336,7 +336,7 @@
                     welcomeMessage.textContent = `Welcome, ${username}!`;
                     setTimeout(function() {
                         loginPopup.style.display = 'none';
-                     //   localStorage.setItem('loggedIn', 'true');
+                        localStorage.setItem('loggedIn', 'true');
                         showLoggedInMenuItems();
                     }, 1000);
                 } else {
@@ -372,6 +372,14 @@
                 menu.appendChild(logout);
             }
         });
+
+            // Function to check if the user is logged in
+    function checkLoginStatus() {
+        const loggedIn = localStorage.getItem('loggedIn');
+
+        if (loggedIn === 'true') {
+            showLoggedInMenuItems();
+        }
 
         // Countdown Timer Script
         const weddingDate = new Date("September 13, 2025 00:00:00").getTime();

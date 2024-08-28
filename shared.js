@@ -22,6 +22,7 @@
             .then(response => response.json())
             .then(data => {
                 users = data.users;
+                console.log('Users loaded:', users); // Debugging line
             })
             .catch(error => console.error('Error fetching users:', error));
 
@@ -34,6 +35,8 @@
         loginButton.addEventListener('click', () => {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+
+            console.log('Attempting to log in with username:', username); // Debugging line
 
             const user = users.find(user => user.username === username && user.password === password);
 

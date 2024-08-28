@@ -217,6 +217,22 @@
         </main>
 
         <script>
+
+	document.addEventListener("DOMContentLoaded", function() {
+    const backgroundColor = localStorage.getItem("backgroundColor");
+    const navbarColor = localStorage.getItem("navbarColor");
+    const textColor = localStorage.getItem("textColor");
+
+    if (backgroundColor) {
+        document.body.style.backgroundColor = backgroundColor;
+    }
+    if (navbarColor) {
+        document.querySelector("nav").style.backgroundColor = navbarColor;
+    }
+    if (textColor) {
+        document.body.style.color = textColor;
+    }
+});	
             // Hamburger menu toggle
             document.getElementById("hamburger-menu").onclick = function() {
                 this.classList.toggle("active");

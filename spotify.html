@@ -35,14 +35,14 @@
         .hamburger-menu {
             width: 30px;
             height: 30px;
-            background-color:  #CABEA6;
+            background-color:  Transparent;
             position: relative;
             cursor: pointer;
         }
         .hamburger-menu div {
             width: 100%;
             height: 4px;
-            background-color: black;
+            background-color: white;
             margin: 5px 0;
             transition: all 0.3s ease;
         }
@@ -123,6 +123,11 @@
     function goBack() {
          window.location.href = "secret.html";
      }
+	// Hamburger menu toggle
+        document.getElementById("hamburger-menu").onclick = function() {
+                this.classList.toggle("active");
+                document.getElementById("menu").classList.toggle("active");
+            };
  </script>
 </body>
 </html>

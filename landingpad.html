@@ -254,11 +254,11 @@
                 <a href="rsvp.html">RSVP</a>
             </div>
         </nav>
-
+<main>
     <h1>Welcome to Our Wedding, <span id="guest-name"></span>!</h1>
     <h2>Your RSVP Status: <span id="rsvp-status"></span></h2>
     <h2>Your Meal Preference: <span id="meal-preference"></span></h2>
-
+</main>
     <script>
         // Function to get query parameters from the URL
         function getQueryParam(param) {
@@ -309,6 +309,34 @@
 
         gapi.load('client', init);
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.getElementById('hamburger-menu');
+            const menu = document.getElementById('menu');
+            const loginPopup = document.getElementById('login-popup');
+            const loginButton = document.getElementById('login-button');
+            const cancelButton = document.getElementById('cancel-button');
+            const gearIcon = document.getElementById('gear-icon');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const welcomeMessage = document.getElementById('welcome-message');
+            let users = {};
+            
+            // Fetch the users.json file
+            fetch('users.json')
+                .then(response => response.json())
+                .then(data => {
+                    users = data;
+                })
+                .catch(error => {
+                    console.error('Error loading users:', error);
+                });
+            
+            // Handle hamburger menu toggle
+            hamburgerMenu.addEventListener('click', function() {
+                this.classList.toggle('active');
+                menu.classList.toggle('active');
+            });
     <script src="https://apis.google.com/js/api.js"></script>
 </body>
 </html>

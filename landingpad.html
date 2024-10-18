@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Wedding Invitation</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        h1, h2 {
+            font-size: 36px;
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Our Wedding, <span id="guest-name"></span>!</h1>
+    <h2>Your RSVP Status: <span id="rsvp-status"></span></h2>
+    <h2>Your Meal Preference: <span id="meal-preference"></span></h2>
+
+    <script>
+        // Function to get query parameters from the URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Extract the guest name from the URL
+        const guestName = getQueryParam('name');
+        document.getElementById('guest-name').textContent = guestName || "Dear Guest";
+
+        // Google Sheets API integration
+        function fetchGuestData(guestName) {
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: 'YOUR_GOOGLE_SHEETS_ID',
+                range: 'RSVP_Data!A2:C',  // Adjust range to match your sheet
+            }).then(function(response) {
+                const rows = response.result.values;
+                let foundGuest = false;
+
+                // Search for the guest in the sheet data
+                rows.forEach(row => {
+                    if (row[0] === guestName) {  // Assuming the first column contains the names
+                        foundGuest = true;
+                        document.getElementById('rsvp-status').textContent = row[1] || 'Pending';
+                        document.getElementById('meal-preference').textContent = row[2] || 'Not provided';
+                    }
+                });
+
+                if (!foundGuest) {
+                    document.getElementById('rsvp-status').textContent = 'Guest not found';
+                    document.getElementById('meal-preference').textContent = 'N/A';
+                }
+            }).catch(function(error) {
+                console.error('Error fetching guest data:', error);
+            });
+        }
+
+        // Load the Google Sheets API
+        function init() {
+            gapi.client.init({
+                apiKey: 'YOUR_GOOGLE_SHEETS_API_KEY',
+                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+            }).then(function () {
+                fetchGuestData(guestName);
+            });
+        }
+
+        gapi.load('client', init);
+    </script>
+    <script src="https://apis.google.com/js/api.js"></script>
+</body>
+</html>

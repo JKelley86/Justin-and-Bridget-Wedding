@@ -382,22 +382,21 @@
         }
 
         // Countdown Timer Script
-        const weddingDate = new Date("September 13, 2025 00:00:00").getTime();
-        const countdownElement = document.getElementById("countdown");
+const weddingDate = new Date("September 13, 2025 00:00:00").getTime();
+const countdownElement = document.getElementById("countdown");
 
-        const countdownInterval = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
+const countdownInterval = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
 
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                countdownElement.innerHTML = "0";
-                return;
-} else {
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                countdownElement.textContent = days;
-            }
-        }, 1000);
+    if (distance < 0) {
+        clearInterval(countdownInterval);
+        countdownElement.textContent = "0"; // Ensure this sets to 0 after the date passes
+    } else {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        countdownElement.textContent = days;
+    }
+}, 1000);
     }
 
     checkLoginStatus();

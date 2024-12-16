@@ -414,5 +414,25 @@ chatbotId="qAVRGWVMhx77rPX-VIcvP"
 domain="www.chatbase.co"
 defer>
 </script>
+   <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const targetDate = new Date("September 13, 2025").getTime();
+            const countdownElement = document.getElementById("countdown");
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeLeft = targetDate - now;
+
+                if (timeLeft > 0) {
+                    const days = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
+                    countdownElement.textContent = days;
+                } else {
+                    countdownElement.textContent = 0; // Wedding day or past
+                }
+            }
+
+            updateCountdown();
+        });
+    </script>
 </body>
 </html>

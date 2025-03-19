@@ -85,6 +85,7 @@
                         'pageSize': 100,
                         'fields': "files(id, name, mimeType, thumbnailLink)"
                     }))
+               console.log("Files received:", files);
                     .then(response => {
                         const files = response.result.files;
                         if (files && files.length > 0) {

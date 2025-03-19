@@ -81,7 +81,7 @@
                 console.log('Listing files');
                 gapi.client.init({ apiKey: API_KEY, discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"] })
                     .then(() => gapi.client.drive.files.list({
-                        'q': `'${FOLDER_ID}' in parents and mimeType contains 'image/'`,
+                        'q': `'${FOLDER_ID}' in parents and (mimeType contains 'image/jpeg' or mimeType contains 'image/png')`
                         'pageSize': 100,
                         'fields': "files(id, name, mimeType, thumbnailLink)"
                     }))
@@ -91,7 +91,7 @@
                             files.forEach(file => {
                                 const img = document.createElement('img');
                                 img.alt = file.name;
-                                img.src = file.thumbnailLink || `https://drive.google.com/uc?export=view&id=${file.id}`;
+                                img.src = file.webContentLink || `https://drive.google.com/uc?export=view&id=${file.id}`;
                                 document.getElementById('photo-gallery').appendChild(img);
                             });
                         } else {

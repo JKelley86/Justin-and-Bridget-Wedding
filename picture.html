@@ -76,7 +76,6 @@
             console.log('Config loaded:', config);
             const API_KEY = config.googleDriveApiKey;
             const FOLDER_ID = config.googleDriveFolderId;
-        .catch(error => console.error('Error fetching config.json:', error));
 
             function listFiles() {
                 console.log('Listing files');

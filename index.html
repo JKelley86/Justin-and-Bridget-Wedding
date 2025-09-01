@@ -393,7 +393,7 @@ const countdownInterval = setInterval(function() {
         clearInterval(countdownInterval);
         countdownElement.textContent = "0"; // Ensure this sets to 0 after the date passes
     } else {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const days = Math.cell(distance / (1000 * 60 * 60 * 24));
         countdownElement.textContent = days;
     }
 }, 1000);
@@ -436,3 +436,4 @@ defer>
     </script>
 </body>
 </html>
+

@@ -8,71 +8,101 @@
     body {
       margin: 0;
       font-family: 'Playfair Display', serif;
-      background: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
-      background-color: #fdf7f0;
+      background: url('https://i.ibb.co/whjQy6w/dark-wood-bg.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #3b2c20;
+    }
+
+    .overlay {
+      background: rgba(255, 248, 240, 0.9);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
     }
 
     .container {
       max-width: 700px;
-      margin: 50px auto;
-      background: rgba(255, 255, 255, 0.95);
-      border: 5px solid #8b5e3c;
-      border-radius: 12px;
-      padding: 40px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      background: #fffaf3;
+      border: 3px solid #8b5e3c;
+      border-radius: 15px;
+      padding: 50px 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
       text-align: center;
+      position: relative;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      bottom: -15px;
+      left: -15px;
+      border: 8px solid transparent;
+      border-image: url('https://i.ibb.co/4MP4dd6/rope-border.png') 30 round;
+      pointer-events: none;
     }
 
     h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 3em;
+      font-size: 3.5em;
       margin-bottom: 20px;
       color: #5a3822;
-      text-shadow: 1px 1px #d6b292;
+      text-shadow: 2px 2px #e6c9a8;
     }
 
     p {
-      font-size: 1.1em;
-      margin-bottom: 30px;
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      line-height: 1.6em;
     }
 
     a.upload-btn {
       display: inline-block;
-      background: #8b5e3c;
+      background: linear-gradient(135deg, #8b5e3c, #5a3822);
       color: #fff;
-      padding: 16px 32px;
-      font-size: 1.2em;
+      padding: 16px 40px;
+      font-size: 1.3em;
       font-weight: bold;
       text-decoration: none;
-      border-radius: 8px;
-      transition: transform 0.2s, background 0.3s;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      border-radius: 50px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
     }
 
     a.upload-btn:hover {
-      background: #5a3822;
-      transform: scale(1.05);
+      background: linear-gradient(135deg, #a86c47, #5a3822);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     }
 
-    .rope-border {
-      border: 10px solid transparent;
-      padding: 15px;
-      border-image: url('https://i.ibb.co/4MP4dd6/rope-border.png') 30 round;
+    .divider {
+      width: 120px;
+      height: 3px;
+      background: #c9a368;
+      margin: 20px auto 40px auto;
+      border-radius: 2px;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container rope-border">
-    <h1>Share Your Memories</h1>
-    <p>We’d love to see the moments you captured from our special day. Click below to upload your photos!</p>
-    
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiPFt4XllqADn8F4ejHFiwhr8bZY2J_a2IxbWLw9Koodp4NA/viewform?usp=sf_link" 
-       target="_blank" 
-       class="upload-btn">
-      📸 Upload Photos
-    </a>
+  <div class="overlay">
+    <div class="container">
+      <h1>Share Your Memories</h1>
+      <div class="divider"></div>
+      <p>We’d love to see the moments you captured from our special day.  
+         Please upload your photos by clicking below.</p>
+      
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiPFt4XllqADn8F4ejHFiwhr8bZY2J_a2IxbWLw9Koodp4NA/viewform?usp=sf_link" 
+         target="_blank" 
+         class="upload-btn">
+        📸 Upload Photos
+      </a>
+    </div>
   </div>
 </body>
 </html>

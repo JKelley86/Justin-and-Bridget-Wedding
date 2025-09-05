@@ -1,125 +1,66 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Form</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://apis.google.com/js/api.js"></script>
-    <style>
-        body {
-            background-image: url('picture7.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-        li {
-            margin: 0 10px;
-        }
-        main {
-            flex: 1;
-            padding: 40px;
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
-            color: white;
-            width: 100%;
-            margin-top: auto;
-            position: relative;
-        }
-        h1, h2 {
-            text-align: center;
-        }
-        .photo-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .photo-gallery img {
-            margin: 10px;
-            max-width: 200px;
-            max-height: 200px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Photo Upload</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+      background-color: #fdf7f0;
+      color: #3b2c20;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.95);
+      border: 5px solid #8b5e3c;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #5a3822;
+      text-shadow: 1px 1px #d6b292;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 800px;
+      border: none;
+      border-radius: 10px;
+      background: #fffdf8;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .rope-border {
+      border: 10px solid transparent;
+      padding: 15px;
+      border-image: url('https://i.ibb.co/4MP4dd6/rope-border.png') 30 round;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <nav>
-            <div class="navbar-right">
-                <span class="navbar-text" id="secret-button" style="cursor: pointer;">Justin & Bridget's Wedding</span>
-            </div>
-        </nav>
-
-        <main>
-            <h1>Wedding Photos</h1>
-            <p>Photo Form</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiPFt4XllqADn8F4ejHFiwhr8bZY2J_a2IxbWLw9Koodp4NA/viewform?usp=sf_link" target="_blank">Picture Upload Form</a>
-            <div class="photo-gallery" id="photo-gallery"></div>
-        </main>
-
-        <footer>
-            <span>&copy; 2024 Justin & Bridget’s Wedding. All rights reserved.</span>
-        </footer>
-    </div>
-
-<script>
-    fetch('config.json')
-        .then(response => response.json())
-        .then(config => {
-            console.log('Config loaded:', config);
-            const API_KEY = config.googleDriveApiKey;
-            const FOLDER_ID = config.googleDriveFolderId;
-
-            function listFiles() {
-                console.log('Listing files');
-                gapi.client.init({ apiKey: API_KEY, discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"] })
-                    .then(() => {
-                        console.log("Google API initialized. Fetching files...");
-                        return gapi.client.drive.files.list({
-                            'q': `"${FOLDER_ID}" in parents and (mimeType contains 'image/jpeg' or mimeType contains 'image/png')`,
-                            'pageSize': 100,
-                            'fields': "files(id, name, mimeType, webContentLink, thumbnailLink)"
-                        });
-                    })
-                    .then(response => {
-                        const files = response.result.files;
-                        if (files && files.length > 0) {
-                            files.forEach(file => {
-                                const img = document.createElement('img');
-                                img.alt = file.name;
-                                img.src = file.webContentLink || `https://drive.google.com/uc?export=view&id=${1oivfXhrbZM9x4wKPr4tWqrQeV_Yj7OKmhAUkVAnybSp2S91epit7XcNwb5KGTRjMs-9-lWvQ}`;
-                                document.getElementById('photo-gallery').appendChild(img);
-                            });
-                        } else {
-                            document.getElementById('photo-gallery').innerHTML = 'No photos found.';
-                        }
-                    })
-                    .catch(error => console.error('Error listing files:', error));
-            }
-
-            function handleClientLoad() {
-                gapi.load('client', listFiles);
-            }
-
-            document.addEventListener('DOMContentLoaded', handleClientLoad);
-        })
-        .catch(error => console.error('Error fetching config.json:', error));
-
-    document.getElementById("secret-button").onclick = function() {
-        const password = prompt("Please enter the password to view this page:");
-        if (password === "6552") {
-            window.location.href = "secret.html";
-        } else {
-            alert("Incorrect password.");
-        }
-    };
-</script>
+  <div class="container rope-border">
+    <h1>Share Your Memories</h1>
+    <p>We’d love to see the moments you captured from our special day. Please upload your photos below!</p>
+    
+    <!-- Replace the src below with your Google Form embed link -->
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfiPFt4XllqADn8F4ejHFiwhr8bZY2J_a2IxbWLw9Koodp4NA/viewform?usp=sf_link"></iframe>
+  </div>
 </body>
 </html>

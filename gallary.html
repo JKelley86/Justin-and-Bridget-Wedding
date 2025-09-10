@@ -8,13 +8,14 @@
     body {
       margin: 0;
       font-family: 'Playfair Display', serif;
+      /* Full-page dark wood background */
       background: url('https://img.freepik.com/free-photo/grunge-style-old-paper-background_1048-7928.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center fixed;
       background-size: cover;
       color: #3b2c20;
     }
 
     .overlay {
-      background: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.4); /* soft overlay for contrast */
       min-height: 100vh;
       padding: 40px 20px;
       display: flex;
@@ -28,7 +29,7 @@
       background: #fffaf3;
       border: 3px solid #8b5e3c;
       border-radius: 15px;
-      padding: 40px 30px;
+      padding: 50px 40px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.5);
       text-align: center;
     }
@@ -49,10 +50,12 @@
       border-radius: 2px;
     }
 
-    iframe {
+    .gallery img {
       width: 100%;
-      min-height: 1500px;
-      border: none;
+      margin: 20px 0;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      object-fit: cover;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
@@ -62,8 +65,36 @@
     <div class="container">
       <h1>Captured Moments</h1>
       <div class="divider"></div>
-      <iframe src="https://script.google.com/macros/s/AKfycbwMr9DT1OdqHDO93rXcGdWZqxWcw1BnHMUGsl8utD9elAOF7ZDDA_RONHyMie3LdOZbLw/exec"></iframe>
+      <div id="gallery">
+        <p>Loading photos…</p>
+      </div>
     </div>
   </div>
+
+  <script>
+    // Replace this with your deployed Apps Script JSON URL
+    const jsonUrl = "https://script.google.com/macros/s/AKfycbwMr9DT1OdqHDO93rXcGdWZqxWcw1BnHMUGsl8utD9elAOF7ZDDA_RONHyMie3LdOZbLw/exec";
+
+    async function loadGallery() {
+      try {
+        const res = await fetch(jsonUrl);
+        const images = await res.json();
+        const gallery = document.getElementById("gallery");
+        gallery.innerHTML = ""; // clear loading text
+
+        images.forEach(url => {
+          const img = document.createElement("img");
+          img.src = url;
+          img.loading = "lazy"; // lazy load for performance
+          gallery.appendChild(img);
+        });
+      } catch (err) {
+        console.error(err);
+        document.getElementById("gallery").innerHTML = "<p>⚠️ Could not load photos.</p>";
+      }
+    }
+
+    loadGallery();
+  </script>
 </body>
 </html>

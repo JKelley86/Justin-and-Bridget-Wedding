@@ -49,23 +49,10 @@
       border-radius: 2px;
     }
 
-    .gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    .gallery img {
+    iframe {
       width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      object-fit: cover;
-    }
-
-    .loading {
-      font-size: 1.3em;
-      color: #5a3822;
-      margin-top: 20px;
+      min-height: 1500px;
+      border: none;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
@@ -75,42 +62,8 @@
     <div class="container">
       <h1>Captured Moments</h1>
       <div class="divider"></div>
-      <div id="gallery" class="gallery">
-        <p class="loading">Loading photos…</p>
-      </div>
+      <iframe src="https://script.google.com/macros/s/AKfycbwfnv7rz7y7jmYi9ED6PFqRYECmvPaobSvcVGxM7qf0irqnZCulg84pr4V27cxArI5wHg/exec"></iframe>
     </div>
   </div>
-
-  <script>
-    // Your Apps Script Web App URL
-    const webAppUrl = "https://script.google.com/macros/s/AKfycbwfnv7rz7y7jmYi9ED6PFqRYECmvPaobSvcVGxM7qf0irqnZCulg84pr4V27cxArI5wHg/exec";
-
-    async function loadGallery() {
-      try {
-        const response = await fetch(webAppUrl);
-        const htmlText = await response.text();
-
-        // Create a temporary DOM to extract images
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = htmlText;
-
-        const imgs = tempDiv.querySelectorAll("img");
-        const gallery = document.getElementById("gallery");
-        gallery.innerHTML = ""; // clear loading text
-
-        imgs.forEach(img => {
-          const newImg = document.createElement("img");
-          newImg.src = img.src;
-          gallery.appendChild(newImg);
-        });
-      } catch (err) {
-        document.getElementById("gallery").innerHTML =
-          "<p class='loading'>⚠️ Could not load photos.</p>";
-        console.error(err);
-      }
-    }
-
-    loadGallery();
-  </script>
 </body>
 </html>

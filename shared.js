@@ -15,6 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
         spotify.href = 'spotify.html';
         spotify.textContent = 'Spotify';
 
+        const picture = document.createElement('a');
+        picture.href = 'picture.html';
+        picture.textContent = 'Photo Upload';
+
+
         const logout = document.createElement('a');
         logout.href = '#';
         logout.textContent = 'Logout';
@@ -26,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         menu.appendChild(hiddenDetails);
         menu.appendChild(spotify);
+        menu.appendChild(picture);
         menu.appendChild(logout);
     }
 

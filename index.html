@@ -361,12 +361,18 @@
                 spotify.textContent = 'Spotify';
                 menu.appendChild(spotify);
 
+                const picture = document.createElement('a');
+                picture.href = 'picture.html';
+                picture.textContent = 'Photo Upload';
+                menu.appendChild(picture);
+
                 const logout = document.createElement('a');
                 logout.href = '#';
                 logout.textContent = 'Logout';
                 logout.addEventListener('click', function() {
                     menu.removeChild(hiddenDetails);
                     menu.removeChild(spotify);
+                    menu.removeChild(picture);
                     menu.removeChild(logout);
                 });
                 menu.appendChild(logout);
@@ -436,4 +442,5 @@ defer>
     </script>
 </body>
 </html>
+
 
